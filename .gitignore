@@ -226,3 +226,7 @@ pip-log.txt
 #custom
 test.ttl
 
+#vscode
+.vscode/
+
+
