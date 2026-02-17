@@ -606,7 +606,7 @@ public class Constants {
             JSON_LD_TEST_CONTENT_REDUCED+
             ",\n" +
             "    \"generatedAtTime\": {\n" +
-            "        \"@type\": \"http://www.w3.org/2001/XMLSchema#date\",\n" +
+            "        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTime\",\n" +
             "        \"@value\": \"$RESULT_DATE\"\n" +
             "     },\n" +
             "    \"wasGeneratedBy\": {\n" +
@@ -645,7 +645,7 @@ public class Constants {
             "      },\n" +
             "    \"title\": \"$RESULT_TITLE\",\n" +
             "    \"generatedAtTime\": {\n" +
-            "        \"@type\": \"http://www.w3.org/2001/XMLSchema#date\",\n" +
+            "        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTime\",\n" +
             "        \"@value\": \"$RESULT_DATE\"\n" +
             "     },\n" +
             "    \"hadMember\": [" +
