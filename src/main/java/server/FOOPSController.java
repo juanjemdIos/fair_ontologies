@@ -200,7 +200,10 @@ public class FOOPSController {
                 testIDs.add(test_identifier);
                 f = new FOOPS(targetResource, testIDs);
                 f.fairTest();
-                return f.exportJSONLD();
+                // return f.exportJSONLD();
+                return applyOstrailsStatusMapping(f.exportJSONLD());
+
+
             }catch(FileTooLargeException el){
                 logger.error("Error: ontology is too big! "+ el.getMessage());
                 throw new ResponseStatusException(
@@ -258,7 +261,9 @@ public class FOOPSController {
                 targetResource = body.getResourceIdentifier();
                 f = new FOOPS(targetResource, false);
                 f.fairTest();
-                return f.exportJSONLD();
+                // return f.exportJSONLD();
+                return applyOstrailsStatusMapping(f.exportJSONLD());
+
             }catch(FileTooLargeException el){
                 logger.error("Error: ontology too big! "+ el.getMessage());
                 throw new ResponseStatusException(
@@ -371,4 +376,13 @@ public class FOOPSController {
         }
 
     }
+
+    private String applyOstrailsStatusMapping(String jsonLD) {
+        return jsonLD
+                .replace("\"value\": \"ok\"", "\"value\": \"pass\"")
+                .replace("\"value\": \"error\"", "\"value\": \"fail\"")
+                .replace("\"value\": \"fail\", \"explanation\": \"Unexpected error", "\"value\": \"error\", \"explanation\": \"Unexpected error"
+                );
+    }
+
 }

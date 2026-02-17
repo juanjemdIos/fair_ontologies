@@ -354,6 +354,9 @@ public class Constants {
     public static final String OK = "ok";
     public static final String ERROR = "error";
 
+    public static final String PASS = "pass";
+    public static final String FAIL = "fail";
+
     public static final String ERROR_METADATA = "Metadata could not be loaded";
     public static final String ERROR_VOC = "Could not find any imported/reused vocabularies";
 
