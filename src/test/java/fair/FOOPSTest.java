@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -325,6 +326,50 @@ public class FOOPSTest {
 
         assertEquals("No temporary folders should be left after a failed initialization",
                 countBefore, countAfter);
+    }
+
+    /**
+     * This test verifies that the controller endpoint /assess/test/{test_identifier}
+     * works with both short IDs and full URLs (issue 223).
+     * It simulates what the controller does: extract the test ID and pass it to FOOPS.
+     */
+    @Test
+    public void testAssessWithShortIdAndFullUrl(){
+        String ontologyFile = "skos_example.ttl";
+        String shortId = "PURL1";
+        String fullUrl = "https://w3id.org/foops/test/PURL1";
+
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource(ontologyFile).getFile());
+
+            // witha short id
+            String extractedFromShort = FOOPSController.extractTestId(shortId);
+            ArrayList<String> testIDs_short = new ArrayList<>();
+            testIDs_short.add(extractedFromShort);
+            FOOPS f_short = new FOOPS(is.toString(), testIDs_short);
+            f_short.fairTest();
+
+            // with a full url
+            String extractedFromUrl = FOOPSController.extractTestId(fullUrl);
+            ArrayList<String> testIDs_url = new ArrayList<>();
+            testIDs_url.add(extractedFromUrl);
+            FOOPS f_url = new FOOPS(is.toString(), testIDs_url);
+            f_url.fairTest();
+
+            assertEquals(extractedFromShort, extractedFromUrl);
+
+            assertEquals(
+                    f_short.getOntology().getOntologyURI(),
+                    f_url.getOntology().getOntologyURI()
+            );
+
+            f_short.removeTemporaryFolders();
+            f_url.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
     }
 
 }

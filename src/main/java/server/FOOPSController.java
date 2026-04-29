@@ -206,8 +206,8 @@ public class FOOPSController {
             try { //has an onto URI been provided?
                 Gson gson = new Gson();
                 targetResource = body.getResourceIdentifier();
-                ArrayList<String> testIDs = new ArrayList<>();
-                testIDs.add(test_identifier);
+                ArrayList<String> testIDs = new ArrayList<>(); 
+                testIDs.add(extractTestId(test_identifier));
                 f = new FOOPS(targetResource, testIDs);
                 f.fairTest();
                 // return f.exportJSONLD();
@@ -399,6 +399,16 @@ public class FOOPSController {
                 .replace("\"value\": \"error\"", "\"value\": \"fail\"")
                 .replace("\"value\": \"fail\", \"explanation\": \"Unexpected error", "\"value\": \"error\", \"explanation\": \"Unexpected error"
                 );
+    }
+
+    public static String extractTestId(String identifier) {
+        if (identifier.startsWith("http://") || identifier.startsWith("https://")) {
+            int lastSlashIndex = identifier.lastIndexOf('/');
+            if (lastSlashIndex != -1 && lastSlashIndex < identifier.length() - 1) {
+                return identifier.substring(lastSlashIndex + 1);
+            }
+        }
+        return identifier;
     }
 
 }
