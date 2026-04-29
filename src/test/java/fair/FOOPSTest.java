@@ -319,4 +319,30 @@ public class FOOPSTest {
         assertTrue("Result must contain URI2", result.contains(Constants.URI2_URL));
     }
 
+    /**
+     * This test verifies that temporary folders are cleaned up even when
+     * an exception occurs during FOOPS initialization (Issue 236)
+     */
+    @Test
+    public void testTemporaryFoldersAreCleanedUpOnError() {
+        // Count folders foops* before the test
+        File workDir = new File(".");
+        File[] before = workDir.listFiles(f -> f.isDirectory() && f.getName().startsWith("foops"));
+        int countBefore = before != null ? before.length : 0;
+
+        // Attempt to load an invalid URI, which should fail
+        try {
+            FOOPS f = new FOOPS("no-es-una-uri", false);
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            // We expect this to fail, so we do nothing
+        }
+
+        File[] after = workDir.listFiles(f -> f.isDirectory() && f.getName().startsWith("foops"));
+        int countAfter = after != null ? after.length : 0;
+
+        assertEquals("No temporary folders should be left after a failed initialization",
+                countBefore, countAfter);
+    }
+
 }
