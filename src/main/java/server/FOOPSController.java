@@ -155,7 +155,8 @@ public class FOOPSController {
     )
     @GetMapping(path = "/tests",  produces = "application/ld+json")
     public String getTests() {
-        return Constants.FULL_LIST_OF_TESTS;
+        // return Constants.FULL_LIST_OF_TESTS;
+         return Constants.getFullListOfTestsMetadata();
     }
 
     @Operation(
