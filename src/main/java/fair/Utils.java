@@ -74,13 +74,16 @@ public class Utils {
                 in.close();
                 logger.info("Vocabulary in "+serialization+" downloaded successfully " +
                         "(not downloading other serializations)");
-                break;
+                // break;
+                return;
             } catch (Exception e) {
                 final String message = "Failed to download vocabulary in RDF format [" + serialization +"]: ";
                 logger.error(message + e.toString());
-                throw new RuntimeException(message, e);
+                // move to the end of method becuse break the iteration
+                // throw new RuntimeException(message, e);
             }
         }
+        throw new RuntimeException("Failed to download vocabulary in any RDF serialization: " + uri);
     }
 
     public static String getValueAsLiteralOrURI(OWLAnnotationValue v) {

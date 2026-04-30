@@ -56,8 +56,16 @@ public class FOOPS {
      */
     public FOOPS(String o, ArrayList<String> testsToRun) throws FileTooLargeException {
         initTempFolder();
-        this.ontology = new Ontology(o, false, tmpFolder);
-        checksToRun = new CustomBenchmark(ontology,o,testsToRun);
+        try {
+            this.ontology = new Ontology(o, false, tmpFolder);
+            checksToRun = new CustomBenchmark(ontology, o, testsToRun);
+        } catch (FileTooLargeException e) {
+            this.removeTemporaryFolders();
+            throw e;
+        } catch (Exception e) {
+            this.removeTemporaryFolders();
+            throw e;
+        }
     }
     public FOOPS(String o, boolean isFromFile)throws FileTooLargeException {
         try {
@@ -69,6 +77,9 @@ public class FOOPS {
                 checksToRun = new FileBenchmark(ontology);
             }
         }catch(FileTooLargeException e){
+            this.removeTemporaryFolders();
+            throw e;
+        } catch (Exception e) {
             this.removeTemporaryFolders();
             throw e;
         }
