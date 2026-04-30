@@ -321,7 +321,9 @@ public class FOOPSTest {
             logger.error("Could not load the resource file");
             fail();
         }
-            
+    }
+    
+     /**
      * This test verifies that temporary folders are cleaned up even when
      * an exception occurs during FOOPS initialization (Issue 236)
      */
