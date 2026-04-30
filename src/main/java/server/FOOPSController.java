@@ -77,6 +77,7 @@ public class FOOPSController {
     public String assessPOST(
         @Parameter(description = "Ontology request object", required = true)
         @RequestBody OntologyAssessmentRequestLegacy body) {
+        logger.info("Received assessment request for ontology URI: " + body.getOntologyUri());  
         FOOPS f = null;
         Path ontologyPath = null;
         
@@ -206,6 +207,7 @@ public class FOOPSController {
             try { //has an onto URI been provided?
                 Gson gson = new Gson();
                 targetResource = body.getResourceIdentifier();
+                logger.info("Received test request - test: " + test_identifier + ", resource: " + targetResource);
                 ArrayList<String> testIDs = new ArrayList<>();
                 testIDs.add(test_identifier);
                 f = new FOOPS(targetResource, testIDs);
@@ -269,6 +271,7 @@ public class FOOPSController {
         try{
             try {
                 targetResource = body.getResourceIdentifier();
+                logger.info("Received result set request - result set: " + identifier + ", resource: " + targetResource);
                 f = new FOOPS(targetResource, false);
                 f.fairTest();
                 // return f.exportJSONLD();
@@ -354,11 +357,13 @@ public class FOOPSController {
             @RequestParam(value = "otherData", required = false) String otherData) {
         FOOPS f = null;
         File tempFile = null;
-        logger.info("Received request!");
+        // logger.info("Received request!");
+       
         if (!file.isEmpty()) {
             String fileName = file.getOriginalFilename();
             try {
                 tempFile = File.createTempFile("uploaded_onto_", "_" + fileName);
+                logger.info("Received assessment request for file: " + file.getOriginalFilename() + " (size: " + file.getSize() + " bytes)");
                 file.transferTo(tempFile);
                 f = new FOOPS(tempFile.getAbsolutePath(), true);
                 f.fairTest();
