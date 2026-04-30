@@ -302,6 +302,26 @@ public class FOOPSTest {
     }
 
     /**
+     * This test verifies that the JSON-LD output contains the
+     * required 'isDefinedBy' and 'landingPage' fields (Issue 242)
+     */
+    @Test
+    public void testOutputContainsNewFields() {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonOutput = f.exportJSONLD();
+            assertNotNull(jsonOutput);
+            assertTrue("JSON-LD must contain 'isDefinedBy'", jsonOutput.contains("\"isDefinedBy\""));
+            assertTrue("JSON-LD must contain 'landingPage'", jsonOutput.contains("\"landingPage\""));
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file");
+            fail();
+        }
+            
      * This test verifies that temporary folders are cleaned up even when
      * an exception occurs during FOOPS initialization (Issue 236)
      */
