@@ -600,7 +600,13 @@ public class Constants {
             "      \"@type\": \"Test\",\n" +
             "      \"description\": \"$TEST_DESCRIPTION\",\n" +
             "      \"identifier\": \"$TEST_ID\",\n" +
-            "      \"title\": \"$TEST_TITLE\"\n" +
+            "      \"title\": \"$TEST_TITLE\",\n" +
+            "      \"isDefinedBy\": {\n" +
+            "        \"@id\": \"$TEST_ID\"\n" +
+            "      },\n" +
+            "      \"landingPage\": {\n" +
+            "        \"@id\": \"https://oeg-upm.github.io/fair_ontologies/doc/test/$TEST_ABBRV/$TEST_ABBRV.html\"\n" +
+            "      }\n" +
             "    }";
     public static String JSON_LD_TEST_CONTENT_FULL =
             JSON_LD_TEST_CONTENT_REDUCED+
