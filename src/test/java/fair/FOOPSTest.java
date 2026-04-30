@@ -302,6 +302,24 @@ public class FOOPSTest {
     }
 
     /**
+     * This test verifies that GET /tests returns test metadata (instead of just an array of ids) including
+     * title, description, endpointURL, isDefinedBy and landingPage (Issue 224)
+     */
+    @Test
+    public void testGetTestsReturnsMetadata() {
+        String result = Constants.getFullListOfTestsMetadata();
+        assertNotNull(result);
+        assertTrue("Result must contain @id", result.contains("\"@id\""));
+        assertTrue("Result must contain title", result.contains("\"title\""));
+        assertTrue("Result must contain description", result.contains("\"description\""));
+        assertTrue("Result must contain endpointURL", result.contains("\"endpointURL\""));
+        assertTrue("Result must contain isDefinedBy", result.contains("\"isDefinedBy\""));
+        assertTrue("Result must contain landingPage", result.contains("\"landingPage\""));
+        assertTrue("Result must contain FIND1", result.contains(Constants.FIND1_URL));
+        assertTrue("Result must contain URI2", result.contains(Constants.URI2_URL));
+    }
+
+    /**
      * This test verifies that the JSON-LD output contains the
      * required 'isDefinedBy' and 'landingPage' fields (Issue 242)
      */
