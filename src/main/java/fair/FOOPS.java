@@ -209,6 +209,7 @@ public class FOOPS {
         template = template.replace("$RESULT_DESCRIPTION",Utils.escapeJson(check.getExplanation()));
         template = template.replace("$RESULT_TITLE",
                 "Output from running test: "+check.getAbbreviation()+" ("+ check.getId()+")");
+        template = template.replace("$TEST_VERSION", Constants.FOOPS_TEST_VERSION);
         template = template.replace("$RESULT_DATE",""+new Date().toString());
         template = template.replace("$RESULT_VALUE",check.getStatus());// Status should be consistent with pass/fail
         float completion = (float) (check.getTotal_passed_tests() * 100) /check.getTotal_tests_run();
@@ -249,6 +250,7 @@ public class FOOPS {
         resultSet = resultSet.replace("$ORIGINAL_RESOURCE",ontology.getOntologyURI());
         resultSet = resultSet.replace("$RESULT_TITLE",
                 "Results from running FOOPS! tests for benchmark: "+checksToRun.getName());
+        resultSet = resultSet.replace("$TEST_VERSION", Constants.FOOPS_TEST_VERSION);
         resultSet = resultSet.replace("$RESULT_DATE",""+new Date().toString());
         return resultSet;
     }

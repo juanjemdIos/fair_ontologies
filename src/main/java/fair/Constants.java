@@ -601,6 +601,7 @@ public class Constants {
             "      \"description\": \"$TEST_DESCRIPTION\",\n" +
             "      \"identifier\": \"$TEST_ID\",\n" +
             "      \"title\": \"$TEST_TITLE\",\n" +
+            "      \"version\": \"$TEST_VERSION\",\n" +
             "      \"isDefinedBy\": {\n" +
             "        \"@id\": \"$TEST_ID\"\n" +
             "      },\n" +
@@ -650,6 +651,7 @@ public class Constants {
             "        \"@id\": \"http://creativecommons.org/licenses/by/4.0/\"\n" +
             "      },\n" +
             "    \"title\": \"$RESULT_TITLE\",\n" +
+            "    \"version\": \"$TEST_VERSION\",\n" +
             "    \"generatedAtTime\": {\n" +
             "        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTime\",\n" +
             "        \"@value\": \"$RESULT_DATE\"\n" +
@@ -685,9 +687,13 @@ public class Constants {
                "\""+ URI2_URL +"\""+
             "]";
 
-public static final String FOOPS_TESTS_ENDPOINT = "https://foops.linkeddata.es/assess/test/";
-public static final String FOOPS_DOC_BASE_URL = "https://oeg-upm.github.io/fair_ontologies/doc/test/";
-public static String getFullListOfTestsMetadata() {
+    // Version of all FOOPS! tests (currently all tests share the same version)
+    // change in case of update
+    public static final String FOOPS_TEST_VERSION = "0.0.1";
+
+    public static final String FOOPS_TESTS_ENDPOINT = "https://foops.linkeddata.es/assess/test/";
+    public static final String FOOPS_DOC_BASE_URL = "https://oeg-upm.github.io/fair_ontologies/doc/test/";
+    public static String getFullListOfTestsMetadata() {
         return "[\n" +
                 "  {\"@id\": \""+FIND1_URL+"\", \"title\": \""+FIND1_TITLE+"\", \"description\": \""+FIND1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+FIND1+"\", \"isDefinedBy\": {\"@id\": \""+FIND1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+FIND1+"/"+FIND1+".html\"}},\n" +
                 "  {\"@id\": \""+URI1_URL+"\", \"title\": \""+URI1_TITLE+"\", \"description\": \""+URI1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+URI1+"\", \"isDefinedBy\": {\"@id\": \""+URI1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+URI1+"/"+URI1+".html\"}},\n" +
