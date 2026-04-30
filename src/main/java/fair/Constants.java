@@ -600,7 +600,8 @@ public class Constants {
             "      \"@type\": \"Test\",\n" +
             "      \"description\": \"$TEST_DESCRIPTION\",\n" +
             "      \"identifier\": \"$TEST_ID\",\n" +
-            "      \"title\": \"$TEST_TITLE\"\n" +
+            "      \"title\": \"$TEST_TITLE\",\n" +
+            "      \"version\": \"$TEST_VERSION\"\n" +
             "    }";
     public static String JSON_LD_TEST_CONTENT_FULL =
             JSON_LD_TEST_CONTENT_REDUCED+
@@ -644,6 +645,7 @@ public class Constants {
             "        \"@id\": \"http://creativecommons.org/licenses/by/4.0/\"\n" +
             "      },\n" +
             "    \"title\": \"$RESULT_TITLE\",\n" +
+            "    \"version\": \"$TEST_VERSION\",\n" +
             "    \"generatedAtTime\": {\n" +
             "        \"@type\": \"http://www.w3.org/2001/XMLSchema#dateTime\",\n" +
             "        \"@value\": \"$RESULT_DATE\"\n" +
@@ -678,4 +680,11 @@ public class Constants {
                "\""+ VER2_URL +"\","+
                "\""+ URI2_URL +"\""+
             "]";
+
+    // Version of all FOOPS! tests (currently all tests share the same version)
+    // change in case of update
+    public static final String FOOPS_TEST_VERSION = "0.0.1";
+
 }
+
+
