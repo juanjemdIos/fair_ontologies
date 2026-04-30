@@ -600,7 +600,13 @@ public class Constants {
             "      \"@type\": \"Test\",\n" +
             "      \"description\": \"$TEST_DESCRIPTION\",\n" +
             "      \"identifier\": \"$TEST_ID\",\n" +
-            "      \"title\": \"$TEST_TITLE\"\n" +
+            "      \"title\": \"$TEST_TITLE\",\n" +
+            "      \"isDefinedBy\": {\n" +
+            "        \"@id\": \"$TEST_ID\"\n" +
+            "      },\n" +
+            "      \"landingPage\": {\n" +
+            "        \"@id\": \"https://oeg-upm.github.io/fair_ontologies/doc/test/$TEST_ABBRV/$TEST_ABBRV.html\"\n" +
+            "      }\n" +
             "    }";
     public static String JSON_LD_TEST_CONTENT_FULL =
             JSON_LD_TEST_CONTENT_REDUCED+
@@ -678,4 +684,36 @@ public class Constants {
                "\""+ VER2_URL +"\","+
                "\""+ URI2_URL +"\""+
             "]";
+
+public static final String FOOPS_TESTS_ENDPOINT = "https://foops.linkeddata.es/assess/test/";
+public static final String FOOPS_DOC_BASE_URL = "https://oeg-upm.github.io/fair_ontologies/doc/test/";
+public static String getFullListOfTestsMetadata() {
+        return "[\n" +
+                "  {\"@id\": \""+FIND1_URL+"\", \"title\": \""+FIND1_TITLE+"\", \"description\": \""+FIND1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+FIND1+"\", \"isDefinedBy\": {\"@id\": \""+FIND1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+FIND1+"/"+FIND1+".html\"}},\n" +
+                "  {\"@id\": \""+URI1_URL+"\", \"title\": \""+URI1_TITLE+"\", \"description\": \""+URI1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+URI1+"\", \"isDefinedBy\": {\"@id\": \""+URI1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+URI1+"/"+URI1+".html\"}},\n" +
+                "  {\"@id\": \""+CN1_URL+"\", \"title\": \""+CN1_TITLE+"\", \"description\": \""+CN1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+CN1+"\", \"isDefinedBy\": {\"@id\": \""+CN1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+CN1+"/"+CN1+".html\"}},\n" +
+                "  {\"@id\": \""+DOC1_URL+"\", \"title\": \""+DOC1_TITLE+"\", \"description\": \""+DOC1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+DOC1+"\", \"isDefinedBy\": {\"@id\": \""+DOC1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+DOC1+"/"+DOC1+".html\"}},\n" +
+                "  {\"@id\": \""+RDF1_URL+"\", \"title\": \""+RDF1_TITLE+"\", \"description\": \""+RDF1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+RDF1+"\", \"isDefinedBy\": {\"@id\": \""+RDF1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+RDF1+"/"+RDF1+".html\"}},\n" +
+                "  {\"@id\": \""+OM1_URL+"\", \"title\": \""+OM1_TITLE+"\", \"description\": \""+OM1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM1+"\", \"isDefinedBy\": {\"@id\": \""+OM1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM1+"/"+OM1+".html\"}},\n" +
+                "  {\"@id\": \""+OM2_URL+"\", \"title\": \""+OM2_TITLE+"\", \"description\": \""+OM2_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM2+"\", \"isDefinedBy\": {\"@id\": \""+OM2_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM2+"/"+OM2+".html\"}},\n" +
+                "  {\"@id\": \""+OM3_URL+"\", \"title\": \""+OM3_TITLE+"\", \"description\": \""+OM3_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM3+"\", \"isDefinedBy\": {\"@id\": \""+OM3_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM3+"/"+OM3+".html\"}},\n" +
+                "  {\"@id\": \""+OM4_1_URL+"\", \"title\": \""+OM4_1_TITLE+"\", \"description\": \""+OM4_1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM4_1+"\", \"isDefinedBy\": {\"@id\": \""+OM4_1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM4_1+"/"+OM4_1+".html\"}},\n" +
+                "  {\"@id\": \""+OM4_2_URL+"\", \"title\": \""+OM4_2_TITLE+"\", \"description\": \""+OM4_2_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM4_2+"\", \"isDefinedBy\": {\"@id\": \""+OM4_2_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM4_2+"/"+OM4_2+".html\"}},\n" +
+                "  {\"@id\": \""+OM5_1_URL+"\", \"title\": \""+OM5_1_TITLE+"\", \"description\": \""+OM5_1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM5_1+"\", \"isDefinedBy\": {\"@id\": \""+OM5_1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM5_1+"/"+OM5_1+".html\"}},\n" +
+                "  {\"@id\": \""+OM5_2_URL+"\", \"title\": \""+OM5_2_TITLE+"\", \"description\": \""+OM5_2_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+OM5_2+"\", \"isDefinedBy\": {\"@id\": \""+OM5_2_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+OM5_2+"/"+OM5_2+".html\"}},\n" +
+                "  {\"@id\": \""+FIND2_URL+"\", \"title\": \""+FIND2_TITLE+"\", \"description\": \""+FIND2_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+FIND2+"\", \"isDefinedBy\": {\"@id\": \""+FIND2_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+FIND2+"/"+FIND2+".html\"}},\n" +
+                "  {\"@id\": \""+FIND3_URL+"\", \"title\": \""+FIND3_TITLE+"\", \"description\": \""+FIND3_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+FIND3+"\", \"isDefinedBy\": {\"@id\": \""+FIND3_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+FIND3+"/"+FIND3+".html\"}},\n" +
+                "  {\"@id\": \""+FIND3_BIS_URL+"\", \"title\": \""+FIND3_BIS_TITLE+"\", \"description\": \""+FIND3_BIS_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+FIND3_BIS+"\", \"isDefinedBy\": {\"@id\": \""+FIND3_BIS_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+FIND3_BIS+"/"+FIND3_BIS+".html\"}},\n" +
+                "  {\"@id\": \""+HTTP1_URL+"\", \"title\": \""+HTTP1_TITLE+"\", \"description\": \""+HTTP1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+HTTP1+"\", \"isDefinedBy\": {\"@id\": \""+HTTP1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+HTTP1+"/"+HTTP1+".html\"}},\n" +
+                "  {\"@id:\"" + VOC1_URL + "\", \"title:\"" + VOC1_TITLE + "\", \"description:\"" + VOC1_DESC + "\", \"endpointURL:\"" + FOOPS_TESTS_ENDPOINT + VOC1 + "\", \"isDefinedBy: {\"@id:\"" + VOC1_URL + "\"}, \"landingPage: {\"@id:\"" + FOOPS_DOC_BASE_URL + VOC1 + "/" + VOC1 + ".html\"}},\n" +
+                "  {\"@id:\"" + VOC2_URL + "\", \"title:\"" + VOC2_TITLE + "\", \"description:\"" + VOC2_DESC + "\", \"endpointURL:\"" + FOOPS_TESTS_ENDPOINT + VOC2 + "\", \"isDefinedBy: {\"@id:\"" + VOC2_URL + "\"}, \"landingPage: {\"@id:\"" + FOOPS_DOC_BASE_URL + VOC2 + "/" + VOC2 + ".html\"}},\n" +
+                "  {\"@id\": \""+VOC3_URL+"\", \"title\": \""+VOC3_TITLE+"\", \"description\": \""+VOC3_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+VOC3+"\", \"isDefinedBy\": {\"@id\": \""+VOC3_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+VOC3+"/"+VOC3+".html\"}},\n" +
+                "  {\"@id\": \""+VOC4_URL+"\", \"title\": \""+VOC4_TITLE+"\", \"description\": \""+VOC4_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+VOC4+"\", \"isDefinedBy\": {\"@id\": \""+VOC4_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+VOC4+"/"+VOC4+".html\"}},\n" +
+                "  {\"@id\": \""+VER1_URL+"\", \"title\": \""+VER1_TITLE+"\", \"description\": \""+VER1_DESC+"\", \"endpointURL\": \""+FOOPS_TESTS_ENDPOINT+VER1+"\", \"isDefinedBy\": {\"@id\": \""+VER1_URL+"\"}, \"landingPage\": {\"@id\": \""+FOOPS_DOC_BASE_URL+VER1+"/"+VER1+".html\"}},\n" +
+                "  {\"@id:\"" + VER2_URL + "\", \"title:\"" + VER2_TITLE + "\", \"description:\"" + VER2_DESC + "\", \"endpointURL:\"" + FOOPS_TESTS_ENDPOINT + VER2 + "\", \"isDefinedBy: {\"@id:\"" + VER2_URL + "\"}, \"landingPage: {\"@id:\"" + FOOPS_DOC_BASE_URL + VER2 + "/" + VER2 + ".html\"}}\n" +
+                "  {\"@id\": \""+URI2_URL+"\", \"title\": \""+URI2_TITLE+"\", \"description\": \""+URI2_DESC+"\", \"endpointURL:\"" + FOOPS_TESTS_ENDPOINT + URI2 + "\", \"isDefinedBy: {\"@id:\"" + URI2_URL + "\"}, \"landingPage: {\"@id:\"" + FOOPS_DOC_BASE_URL + URI2 + "/" + URI2 + ".html\"}}\n" +
+                "]";
+        }
+  
 }
+
