@@ -64,7 +64,9 @@ public abstract class Check {
 
     public Check(Ontology o){
         this.ontology = o;
-        this.ontology_URI = o.getOntologyURI();
+        if(this.ontology!=null) {
+            this.ontology_URI = o.getOntologyURI();
+        }
         total_passed_tests = 0;
         total_tests_run = 1; //by default
     }

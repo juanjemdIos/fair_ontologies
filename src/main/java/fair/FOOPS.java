@@ -246,7 +246,7 @@ public class FOOPS {
         testResults = new StringBuilder(testResults.toString().replace(Constants.FTR_CONTEXT, ""));
         resultSet = resultSet.replace("$LIST_TEST_RESULTS",testResults);
         resultSet = resultSet.replace("$RESULT_ID",resultSetId);
-        resultSet = resultSet.replace("$RESULT_DESCRIPTION",checksToRun.getDescription());
+        resultSet = resultSet.replace("$RESULT_DESCRIPTION",Utils.escapeJson(checksToRun.getDescription()));
         resultSet = resultSet.replace("$ORIGINAL_RESOURCE",ontology.getOntologyURI());
         resultSet = resultSet.replace("$RESULT_TITLE",
                 "Results from running FOOPS! tests for benchmark: "+checksToRun.getName());

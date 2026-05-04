@@ -1,9 +1,7 @@
 package fair;
 
-import entities.Ontology;
 import entities.checks.*;
 import org.junit.Test;
-import org.junit.jupiter.api.io.TempDir;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import server.FOOPSController;
@@ -12,10 +10,9 @@ import server.FileTooLargeException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class FOOPSTest {
