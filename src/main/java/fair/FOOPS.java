@@ -435,5 +435,29 @@ public class FOOPS {
             }
         }
     }
+
+    public String exportBenchmarkScore(String benchmarkId) {
+        String template = Constants.JSON_LD_BENCHMARK_SCORE_TEMPLATE;
+        String scoreId = "urn:foops:" + java.util.UUID.randomUUID();
+        float score = getTotalScore() * 100;
+        int totalPassed = 0;
+        int totalRun = 0;
+
+        for (Check c : this.checksToRun.getChecks()) {
+            totalPassed += c.getTotal_passed_tests();
+            totalRun += c.getTotal_tests_run();
+        }
+
+        String log = "The score was obtained as follows: all passed tests are added and divided " +
+                "by the total number of tests run. " + 
+                "Since " + totalPassed + "/" + totalRun + " tests passed, your score is " + score + "%";
+                
+        template = template.replace("$SCORE_ID", scoreId);
+        template = template.replace("$BENCHMARK_ID", benchmarkId);
+        template = template.replace("$SCORE_VALUE", String.valueOf(score));
+        template = template.replace("$SCORE_LOG", log);
+        template = template.replace("$TEST_RESULT_SET", fillTestResultSetTemplate());
+        return template;
+    }
 }
 
