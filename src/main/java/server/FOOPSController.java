@@ -77,6 +77,7 @@ public class FOOPSController {
     public String assessPOST(
         @Parameter(description = "Ontology request object", required = true)
         @RequestBody OntologyAssessmentRequestLegacy body) {
+        logger.info("Received assessment request for ontology URI: " + body.getOntologyUri());  
         FOOPS f = null;
         Path ontologyPath = null;
         
@@ -150,19 +151,31 @@ public class FOOPSController {
 
 
     @Operation(
-            summary = "Get test metadata (in JSON-LD)",
-            description = "Returns all tests supported by FOOPS!."
+        summary = "Get all FOOPS! test identifiers (in JSON-LD)",
+        description = "Returns a JSON-LD array with all test identifiers supported by FOOPS!. " +
+            "Use these identifiers to call /assess/test/{id} or /tests/{identifier}. " +
+            "See the full catalogue at https://w3id.org/foops/catalogue."
     )
     @GetMapping(path = "/tests",  produces = "application/ld+json")
     public String getTests() {
-        return Constants.FULL_LIST_OF_TESTS;
+        // return Constants.FULL_LIST_OF_TESTS;
+         return Constants.getFullListOfTestsMetadata();
     }
 
     @Operation(
-            summary = "Get test metadata (in JSON-LD)"
+        summary = "Get metadata for a specific FOOPS! test (in JSON-LD)",
+        description = "Returns JSON-LD metadata for a FOOPS! test following the FTR specification. " +
+            "You can use this to retrieve test details before calling /assess/test/{id}. " +
+            "See the full FOOPS! test catalogue at https://w3id.org/foops/catalogue " +
+            "for available test identifiers."
     )
     @GetMapping(path = "/tests/{identifier}",  produces = "application/ld+json")
-    public ResponseEntity<String> getTestMetadata(@PathVariable String identifier) {
+    public ResponseEntity<String> getTestMetadata(
+        @Parameter(description = "Test identifier (e.g., CN1, URI1, OM1, FIND1). " +
+        "See https://w3id.org/foops/catalogue for the full list of available tests.",
+        example = "FIND1",
+        required = true)
+        @PathVariable String identifier) {
         //TO DO: should return the text in /doc/test/identifier/identifier.jsonld
         String url = "https://oeg-upm.github.io/fair_ontologies/doc/test/"+ identifier +"/"+ identifier +".jsonld" ;
         // https://w3id.org/foops/test/FIND1
@@ -175,10 +188,17 @@ public class FOOPSController {
 
     @Operation(
             summary = "Method that returns how to do a POST request to /assess/test/{id}",
-            description = "Returns an indication stating how to do a post request."
+            description = "Returns an example POST request to run a specific test. " +
+                "Replace the test identifier in the path to get the corresponding curl command. " +
+                "See the full FOOPS! test catalogue at https://w3id.org/foops/catalogue."
+
     )
     @GetMapping(path = "assess/test/{test_identifier}")
-    public String getAssessTest(@PathVariable String test_identifier) {
+    public String getAssessTest(
+        @Parameter(description = "Test identifier (e.g., CN1, URI1, OM1, FIND1)",
+        example = "FIND1",
+        required = true)
+        @PathVariable String test_identifier) {
         String response = "curl -X POST \"https://foops.linkeddata.es/assess/test/"+test_identifier+"\""+
                 " -H  \"accept: application/json\" -H  \"Content-Type: application/json\" " +
                 " -d \"{  \\\"resource_identifier\\\": \\\"https://w3id.org/example#\\\"}\"";
@@ -206,8 +226,9 @@ public class FOOPSController {
             try { //has an onto URI been provided?
                 Gson gson = new Gson();
                 targetResource = body.getResourceIdentifier();
-                ArrayList<String> testIDs = new ArrayList<>(); 
-                testIDs.add(extractTestId(test_identifier));
+                logger.info("Received test request - test: " + test_identifier + ", resource: " + targetResource);
+                ArrayList<String> testIDs = new ArrayList<>();
+                testIDs.add(test_identifier);
                 f = new FOOPS(targetResource, testIDs);
                 f.fairTest();
                 // return f.exportJSONLD();
@@ -239,10 +260,17 @@ public class FOOPSController {
 
     @Operation(
             summary = "Method that returns how to do a POST request to /assess/resultSet/{id}",
-            description = "Returns an indication stating how to do a post request."
+            description = "Returns an indication stating how to do a post request. " +
+                        "Available benchmark identifiers: ALL (all FOOPS! tests) and PRE (pre-assessment benchmark for local files). " +
+                        "See the full benchmark catalogue at https://w3id.org/foops/benchmark/."
     )
     @GetMapping(path = "assess/resultset/{identifier}")
-    public String getAssessResultSet(@PathVariable String identifier) {
+    public String getAssessResultSet(
+        @Parameter(description = "Benchmark identifier (ALL or PRE). " +
+        "See https://w3id.org/foops/benchmark/ for details.",
+        example = "ALL",
+        required = true)
+        @PathVariable String identifier) {
         String response = "curl -X POST \"https://foops.linkeddata.es/assess/resultset/" + identifier +"\""+
                 " -H  \"accept: application/json\" -H  \"Content-Type: application/json\" " +
                 " -d \"{  \\\"resource_identifier\\\": \\\"https://w3id.org/example#\\\"}\"";
@@ -269,6 +297,7 @@ public class FOOPSController {
         try{
             try {
                 targetResource = body.getResourceIdentifier();
+                logger.info("Received result set request - result set: " + identifier + ", resource: " + targetResource);
                 f = new FOOPS(targetResource, false);
                 f.fairTest();
                 // return f.exportJSONLD();
@@ -309,11 +338,18 @@ public class FOOPSController {
 //    }
 
     @Operation(
-            summary = "Get metric metadata (in JSON-LD)",
-            description = "Returns metric metadata following the FTR specification."
+        summary = "Get metadata for a specific FOOPS! metric (in JSON-LD)",
+        description = "Returns JSON-LD metadata for a FOOPS! metric following the FTR specification. " +
+            "Metric identifiers correspond to test identifiers (e.g., FIND1, URI1, CN1, OM1). " +
+            "See the full FOOPS! catalogue at https://w3id.org/foops/catalogue."
     )
     @GetMapping(path = "/metrics/{identifier}",  produces = "application/ld+json")
-    public ResponseEntity<String> getMetricMetadata(@PathVariable String identifier) {
+    public ResponseEntity<String> getMetricMetadata(
+        @Parameter(description = "Metric identifier (e.g., FIND1, URI1, CN1, OM1). " +
+        "See https://w3id.org/foops/catalogue for the full list.",
+        example = "FIND1",
+        required = true)
+        @PathVariable String identifier) {
         String url = "https://oeg-upm.github.io/fair_ontologies/doc/metric/"+ identifier +"/"+ identifier +".jsonld" ;
         // https://w3id.org/foops/metric/FIND1
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -323,11 +359,18 @@ public class FOOPSController {
     }
 
     @Operation(
-            summary = "Get benchmark metadata (in JSON-LD)",
-            description = "Returns benchmark metadata following the FTR specification."
+        summary = "Get metadata for a specific FOOPS! benchmark (in JSON-LD)",
+        description = "Returns JSON-LD metadata for a FOOPS! benchmark following the FTR specification. " +
+            "Available benchmark identifiers: ALL (all FOOPS! tests) and PRE (pre-assessment benchmark for local files). " +
+            "See the full benchmark catalogue at https://w3id.org/foops/benchmark/."
     )
     @GetMapping(path = "/benchmarks/{identifier}",  produces = "application/ld+json")
-    public ResponseEntity<String> getBenchmarkMetadata(@PathVariable String identifier) {
+    public ResponseEntity<String> getBenchmarkMetadata(
+        @Parameter(description = "Benchmark identifier (ALL or PRE). " +
+        "See https://w3id.org/foops/benchmark/ for details.",
+        example = "ALL",
+        required = true)
+        @PathVariable String identifier) {
         String url = "https://oeg-upm.github.io/fair_ontologies/doc/benchmark/"+ identifier +"/"+ identifier +".jsonld" ;
         // https://w3id.org/foops/benchmark/ALL
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -354,11 +397,13 @@ public class FOOPSController {
             @RequestParam(value = "otherData", required = false) String otherData) {
         FOOPS f = null;
         File tempFile = null;
-        logger.info("Received request!");
+        // logger.info("Received request!");
+       
         if (!file.isEmpty()) {
             String fileName = file.getOriginalFilename();
             try {
                 tempFile = File.createTempFile("uploaded_onto_", "_" + fileName);
+                logger.info("Received assessment request for file: " + file.getOriginalFilename() + " (size: " + file.getSize() + " bytes)");
                 file.transferTo(tempFile);
                 f = new FOOPS(tempFile.getAbsolutePath(), true);
                 f.fairTest();

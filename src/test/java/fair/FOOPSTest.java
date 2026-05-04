@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class FOOPSTest {
@@ -303,6 +302,46 @@ public class FOOPSTest {
     }
 
     /**
+     * This test verifies that GET /tests returns test metadata (instead of just an array of ids) including
+     * title, description, endpointURL, isDefinedBy and landingPage (Issue 224)
+     */
+    @Test
+    public void testGetTestsReturnsMetadata() {
+        String result = Constants.getFullListOfTestsMetadata();
+        assertNotNull(result);
+        assertTrue("Result must contain @id", result.contains("\"@id\""));
+        assertTrue("Result must contain title", result.contains("\"title\""));
+        assertTrue("Result must contain description", result.contains("\"description\""));
+        assertTrue("Result must contain endpointURL", result.contains("\"endpointURL\""));
+        assertTrue("Result must contain isDefinedBy", result.contains("\"isDefinedBy\""));
+        assertTrue("Result must contain landingPage", result.contains("\"landingPage\""));
+        assertTrue("Result must contain FIND1", result.contains(Constants.FIND1_URL));
+        assertTrue("Result must contain URI2", result.contains(Constants.URI2_URL));
+    }
+
+    /**
+     * This test verifies that the JSON-LD output contains the
+     * required 'isDefinedBy' and 'landingPage' fields (Issue 242)
+     */
+    @Test
+    public void testOutputContainsNewFields() {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonOutput = f.exportJSONLD();
+            assertNotNull(jsonOutput);
+            assertTrue("JSON-LD must contain 'isDefinedBy'", jsonOutput.contains("\"isDefinedBy\""));
+            assertTrue("JSON-LD must contain 'landingPage'", jsonOutput.contains("\"landingPage\""));
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file");
+            fail();
+        }
+    }
+    
+     /**
      * This test verifies that temporary folders are cleaned up even when
      * an exception occurs during FOOPS initialization (Issue 236)
      */
@@ -329,43 +368,47 @@ public class FOOPSTest {
     }
 
     /**
-     * This test verifies that the controller endpoint /assess/test/{test_identifier}
-     * works with both short IDs and full URLs (issue 223).
-     * It simulates what the controller does: extract the test ID and pass it to FOOPS.
+     * This test verifies that the test version is included in the JSON-LD output (issue 214).
      */
     @Test
-    public void testAssessWithShortIdAndFullUrl(){
-        String ontologyFile = "skos_example.ttl";
-        String shortId = "PURL1";
-        String fullUrl = "https://w3id.org/foops/test/PURL1";
-
+    public void testVersionInJsonLdOutput(){
         try {
             ClassLoader classLoader = getClass().getClassLoader();
-            File is = new File(classLoader.getResource(ontologyFile).getFile());
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonld = f.exportJSONLD();
 
-            // witha short id
-            String extractedFromShort = FOOPSController.extractTestId(shortId);
-            ArrayList<String> testIDs_short = new ArrayList<>();
-            testIDs_short.add(extractedFromShort);
-            FOOPS f_short = new FOOPS(is.toString(), testIDs_short);
-            f_short.fairTest();
+            assertTrue("Test version should be present in JSON-LD output",
+                jsonld.contains(Constants.FOOPS_TEST_VERSION));
+            
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
 
-            // with a full url
-            String extractedFromUrl = FOOPSController.extractTestId(fullUrl);
-            ArrayList<String> testIDs_url = new ArrayList<>();
-            testIDs_url.add(extractedFromUrl);
-            FOOPS f_url = new FOOPS(is.toString(), testIDs_url);
-            f_url.fairTest();
-
-            assertEquals(extractedFromShort, extractedFromUrl);
-
-            assertEquals(
-                    f_short.getOntology().getOntologyURI(),
-                    f_url.getOntology().getOntologyURI()
-            );
-
-            f_short.removeTemporaryFolders();
-            f_url.removeTemporaryFolders();
+    /**
+     * This test verifies that the test version is included in the JSON-LD output
+     * when running multiple tests (result set path, (issue 214).
+     */
+   @Test
+    public void testVersionInJsonLdResultSetOutput(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            
+            // isFromFile=true triggers FileBenchmark which has multiple checks,
+            // forcing the result set code path in exportJSONLD()
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonld = f.exportJSONLD();
+            
+            assertTrue("Test version should be present in result set JSON-LD output",
+                jsonld.contains(Constants.FOOPS_TEST_VERSION));
+            
+            f.removeTemporaryFolders();
         } catch (Exception e) {
             logger.error("Could not load the resource file", e);
             fail();
