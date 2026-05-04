@@ -36,8 +36,10 @@ import io.swagger.v3.oas.annotations.servers.Server;
             url = "https://www.apache.org/licenses/LICENSE-2.0"
         )
     ),
+
     servers = {
-        @Server(url = "https://foops.linkeddata.es", description = "Production server")
+		//@Server(url = "http://localhost:8080", description = "Development server")
+		@Server(url = "https://foops.linkeddata.es", description = "Production server")
     }
 )
 
