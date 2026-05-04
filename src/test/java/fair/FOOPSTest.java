@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class FOOPSTest {
@@ -365,6 +365,54 @@ public class FOOPSTest {
 
         assertEquals("No temporary folders should be left after a failed initialization",
                 countBefore, countAfter);
+    }
+
+    /**
+     * This test verifies that the test version is included in the JSON-LD output (issue 214).
+     */
+    @Test
+    public void testVersionInJsonLdOutput(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonld = f.exportJSONLD();
+
+            assertTrue("Test version should be present in JSON-LD output",
+                jsonld.contains(Constants.FOOPS_TEST_VERSION));
+            
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
+
+    /**
+     * This test verifies that the test version is included in the JSON-LD output
+     * when running multiple tests (result set path, (issue 214).
+     */
+   @Test
+    public void testVersionInJsonLdResultSetOutput(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            
+            // isFromFile=true triggers FileBenchmark which has multiple checks,
+            // forcing the result set code path in exportJSONLD()
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String jsonld = f.exportJSONLD();
+            
+            assertTrue("Test version should be present in result set JSON-LD output",
+                jsonld.contains(Constants.FOOPS_TEST_VERSION));
+            
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
     }
 
 }
