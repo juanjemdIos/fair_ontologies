@@ -446,4 +446,14 @@ public class FOOPSController {
                 );
     }
 
+    public static String extractTestId(String identifier) {
+        if (identifier.startsWith("http://") || identifier.startsWith("https://")) {
+            int lastSlashIndex = identifier.lastIndexOf('/');
+            if (lastSlashIndex != -1 && lastSlashIndex < identifier.length() - 1) {
+                return identifier.substring(lastSlashIndex + 1);
+            }
+        }
+        return identifier;
+    }
+
 }
