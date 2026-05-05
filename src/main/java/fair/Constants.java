@@ -765,8 +765,9 @@ public class Constants {
         "    },\n" +
         "    \"value\": \"$SCORE_VALUE\",\n" +
         "    \"log\": \"$SCORE_LOG\",\n" +
-        "    \"scoredTestResults\": $TEST_RESULT_SET\n" +
+        "    \"scoredTestResults\":  [ $TEST_RESULT_SET_LIST ]\n" +
         "}\n";
+
   
 }
 

@@ -41,6 +41,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FOOPS {
     private static final Logger logger = LoggerFactory.getLogger(FOOPS.class);
@@ -439,7 +440,8 @@ public class FOOPS {
     public String exportBenchmarkScore(String benchmarkId) {
         String template = Constants.JSON_LD_BENCHMARK_SCORE_TEMPLATE;
         String scoreId = "urn:foops:" + java.util.UUID.randomUUID();
-        float score = getTotalScore() * 100;
+        float scoreFloat = getTotalScore() * 100;
+        int scoreInt = (int) scoreFloat; 
         int totalPassed = 0;
         int totalRun = 0;
 
@@ -449,14 +451,18 @@ public class FOOPS {
         }
 
         String log = "The score was obtained as follows: all passed tests are added and divided " +
-                "by the total number of tests run. " + 
-                "Since " + totalPassed + "/" + totalRun + " tests passed, your score is " + score + "%";
-                
+                "by the total number of tests run. " +
+                "Since " + totalPassed + "/" + totalRun + " tests passed, your score is " + scoreInt + "%";
+
+        String testResultSetNoContext = fillTestResultSetTemplate()
+            .replace(Constants.FTR_CONTEXT, "");
+        template = template.replace("$TEST_RESULT_SET_LIST", testResultSetNoContext);
+
         template = template.replace("$SCORE_ID", scoreId);
         template = template.replace("$BENCHMARK_ID", benchmarkId);
-        template = template.replace("$SCORE_VALUE", String.valueOf(score));
+        template = template.replace("$SCORE_VALUE", String.valueOf(scoreInt));
         template = template.replace("$SCORE_LOG", log);
-        template = template.replace("$TEST_RESULT_SET", fillTestResultSetTemplate());
+
         return template;
     }
 }
