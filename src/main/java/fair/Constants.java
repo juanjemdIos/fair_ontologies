@@ -761,11 +761,14 @@ public class Constants {
         "    \"@id\": \"$SCORE_ID\",\n" +
         "    \"@type\": \"https://w3id.org/ftr#BenchmarkScore\",\n" +
         "    \"outputFromAlgorithm\": {\n" +
-        "        \"@id\": \"https://w3id.org/foops/algorithm/$BENCHMARK_ID\"\n" +
+        "        \"@id\": \"https://w3id.org/foops/algorithm/$BENCHMARK_ID\",\n" +
+        "        \"@type\": \"https://w3id.org/ftr#ScoringAlgorithm\",\n" +
+        "        \"title\": \"$BENCHMARK_TITLE\",\n" +
+        "        \"description\": \"$BENCHMARK_DESCRIPTION\"\n" +
         "    },\n" +
         "    \"value\": \"$SCORE_VALUE\",\n" +
         "    \"log\": \"$SCORE_LOG\",\n" +
-        "    \"scoredTestResults\":  [ $TEST_RESULT_SET_LIST ]\n" +
+        "    \"scoredTestResults\": $TEST_RESULT_SET_LIST \n" +
         "}\n";
 
   

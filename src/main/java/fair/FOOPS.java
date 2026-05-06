@@ -440,6 +440,8 @@ public class FOOPS {
     public String exportBenchmarkScore(String benchmarkId) {
         String template = Constants.JSON_LD_BENCHMARK_SCORE_TEMPLATE;
         String scoreId = "urn:foops:" + java.util.UUID.randomUUID();
+        String benchmarkTitle;
+        String benchmarkDescription;
         float scoreFloat = getTotalScore() * 100;
         int scoreInt = (int) scoreFloat; 
         int totalPassed = 0;
@@ -462,6 +464,22 @@ public class FOOPS {
         template = template.replace("$BENCHMARK_ID", benchmarkId);
         template = template.replace("$SCORE_VALUE", String.valueOf(scoreInt));
         template = template.replace("$SCORE_LOG", log);
+
+        if ("ALL".equals(benchmarkId)) {
+            benchmarkTitle = "General Benchmark for FAIR Principles";
+            benchmarkDescription = "This algorithm represents how each test is scored. "
+                    + "All passed tests are added and divided by the total number of tests run.";
+        } else if ("PRE".equals(benchmarkId)) {
+            benchmarkTitle = "Priority Benchmark for FAIR Principles";
+            benchmarkDescription = "This algorithm represents how each test is scored. "
+                    + "It only runs the priority FOOPS! tests.";
+        } else {
+            benchmarkTitle = "Unknown Benchmark";
+            benchmarkDescription = "No description available.";
+        }
+
+        template = template.replace("$BENCHMARK_TITLE", benchmarkTitle);
+        template = template.replace("$BENCHMARK_DESCRIPTION", benchmarkDescription);
 
         return template;
     }

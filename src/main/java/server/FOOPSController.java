@@ -438,7 +438,7 @@ public class FOOPSController {
         }
 
     }
-
+    
     @Operation(
         summary = "Returns a benchmark score for a resource following the FTR specification.",
         description = "Returns a BenchmarkScore according to the FTR specification. " +
@@ -451,7 +451,7 @@ public class FOOPSController {
                 "```"
     )
     @CrossOrigin(origins = "*")
-    @PostMapping(path = "assess/score/{identifier}", consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "assess/scoringAlgorithm/{identifier}", consumes = "application/json", produces = "application/json")
     public String postBenchmarkScore(@PathVariable String identifier,
                                     @RequestBody OntologyAssessmentRequest body) {
         FOOPS f = null;
