@@ -44,7 +44,8 @@
                 if ($('#URI_input').val() != ""){
                     $.ajax({
                         //  url:"https://foops.linkeddata.es/assessOntology",
-                        url:"http://localhost:8080/assessOntology",
+                        // url:"http://localhost:8080/assessOntology",
+                        url: SERVER_URL + "/assessOntology",
                         type:"POST",
                         data:"{ \"ontologyUri\": \""+$('#URI_input').val()+"\"}",
                         contentType:"application/json; charset=utf-8",
@@ -85,7 +86,8 @@
                     var formData = new FormData();
                     formData.append('file', file);
                     $.ajax({
-                        url: "http://localhost:8080/assessOntologyFile",
+                        // url: "http://localhost:8080/assessOntologyFile",
+                        url: SERVER_URL + "/assessOntologyFile",
                         type: "POST",
                         data: formData,
                         processData: false,
@@ -119,7 +121,8 @@
 
                 formData2.append('file', file);
                 $.ajax({
-                    url: "http://localhost:8080/assessOntologyFile",
+                    // url: "http://localhost:8080/assessOntologyFile",
+                    url: SERVER_URL + "/assessOntologyFile",
                     type: "POST",
                     data: formData2,
                     processData: false,
