@@ -32,10 +32,11 @@
     <script src="./FAIR_validator.js"></script>
     <script>
         $(document).ready(function(){
-          $('#loader').hide();
+        //   $('#loader').hide();
           $('#run_button').click(function(){
-            $('#loader').show();
-            $('#run_button').hide();
+            // $('#loader_row').show();
+            $('#run_button').text('FOOPS! analysing...').prop('disabled', true);
+            // $('#run_button').hide();
             const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB 
             const selected = document.querySelector('.selector.active');
             // console.log("Selected:", selected.id); 
@@ -50,19 +51,22 @@
                         data:"{ \"ontologyUri\": \""+$('#URI_input').val()+"\"}",
                         contentType:"application/json; charset=utf-8",
                         success: function(data, status){
-                            $('#loader').hide();
-                            $('#run_button').show();
+                            $('#loader_row').hide();
+                            // $('#run_button').show();
+                            $('#run_button').text('RUN').prop('disabled', false);
                             run(data)
                             console.log("ontology received correctly");
                         }
                     }).fail(function (jqXHR, textStatus, error) {
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                        $('#run_button').text('RUN').prop('disabled', false);
                         alert('Error when contacting the server!' );
                     });
                 }else{
-                    $('#loader').hide();
-                    $('#run_button').show();
+                    // $('#loader').hide();
+                    // $('#run_button').show();
+                    $('#run_button').text('RUN').prop('disabled', false);
                     alert('Please enter a valid ontology URI' );
                 }
             }
@@ -73,14 +77,16 @@
                     var file = fileInput.files[0];
                     if(!file){
                         alert('A file has not been selected');
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                         $('#run_button').text('RUN').prop('disabled', false);
                         return;
                     }
                     if (file.size > MAX_FILE_SIZE) {
                         alert('File to assess is too big');
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                         $('#run_button').text('RUN').prop('disabled', false);
                         return;
                     }
                     var formData = new FormData();
@@ -93,18 +99,21 @@
                         processData: false,
                         contentType: false,
                         success: function(data, status){
-                            $('#loader').hide();
-                            $('#run_button').show();
+                            // $('#loader').hide();
+                            // $('#run_button').show();
+                             $('#run_button').text('RUN').prop('disabled', false);
                             run(data);
                         }
                     }).fail(function (jqXHR, textStatus, error) {
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                         $('#run_button').text('RUN').prop('disabled', false);
                         alert('Error when contacting the server!');
                     });
                 }else{
-                    $('#loader').hide();
-                    $('#run_button').show();
+                    // $('#loader').hide();
+                    // $('#run_button').show();
+                     $('#run_button').text('RUN').prop('disabled', false);
                     alert('Please input a valid file' );
                 }
             }
@@ -115,6 +124,8 @@
                 var blob = new Blob([ontologyCode], { type: 'text/plain' });
                 var file = new File([blob], "ontology.owl", { type: "text/plain" });
                 if (file.size > MAX_FILE_SIZE) {
+                    // $('#run_button').show();
+                     $('#run_button').text('RUN').prop('disabled', false);
                     alert('The code entered is too long. Please insert a shorter ontology (< 20mb)');
                     return;
                 }
@@ -128,19 +139,22 @@
                     processData: false,
                     contentType: false,
                     success: function(data, status){
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                         $('#run_button').text('RUN').prop('disabled', false);
                         run(data);
                     }
                     }).fail(function (jqXHR, textStatus, error) {
-                        $('#loader').hide();
-                        $('#run_button').show();
+                        // $('#loader').hide();
+                        // $('#run_button').show();
+                         $('#run_button').text('RUN').prop('disabled', false);
                         alert('Error when contacting the server!');
                     });
 
                 }else{
-                    $('#loader').hide();
-                    $('#run_button').show();
+                    // $('#loader').hide();
+                    // $('#run_button').show();
+                     $('#run_button').text('RUN').prop('disabled', false);
                     alert('Please enter some ontology code' );
                 }
             }
@@ -244,9 +258,13 @@
                     <!-- Input from URI-->
                     <div id="URI" class="row selector-content mt-3" style="display: flex">
 
-                        <div class="col-12 center">
-                            <input id="URI_input" class="input-1" placeholder="Enter an ontology URI...">
+                        <div class="col-12 center" style="display: flex; align-items: center;">
+                            <input id="URI_input" class="input-1" style="flex: 1;" placeholder="Enter an ontology URI...">
+                            <button class="run px-5" id="run_button">RUN</button>
                         </div>
+                        <!-- <div class="row justify-content-center mt-3" style="display: none;" id="loader_row">
+                            <img src="assets/croisant_mini.gif"/>
+                        </div> -->
                         <div id="example" class="col-12 texto6">
                             <br>
                             <p onclick="example1('https://w3id.org/example')">
@@ -300,12 +318,12 @@
         </div>
 
         <!-- Boton RUN -->
-        <div class="row justify-content-center mt-4">
+        <!-- <div class="row justify-content-center mt-4">
             <button class="run px-5" id="run_button">RUN</button>
             <div id='loader'>
               <img src="assets/croisant_mini.gif"/>
             </div>
-        </div>
+        </div> -->
 
 
 
