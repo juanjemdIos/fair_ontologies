@@ -113,6 +113,7 @@ public class FOOPSController {
                     }
                 }
                 f.fairTest();
+                logger.info("Assessment completed for ontology URI: " + body.getOntologyUri());
                 return f.exportJSON();
             }catch(ResponseStatusException e) {
                 throw e;
@@ -233,6 +234,7 @@ public class FOOPSController {
                 f = new FOOPS(targetResource, testIDs);
                 f.fairTest();
                 // return f.exportJSONLD();
+                logger.info("Test assessment completed - test: " + test_identifier + ", resource: " + targetResource);
                 return applyOstrailsStatusMapping(f.exportJSONLD());
 
 
@@ -302,6 +304,7 @@ public class FOOPSController {
                 f = new FOOPS(targetResource, false);
                 f.fairTest();
                 // return f.exportJSONLD();
+                logger.info("Result set assessment completed - benchmark: " + identifier + ", resource: " + targetResource);
                 return applyOstrailsStatusMapping(f.exportJSONLD());
 
             }catch(FileTooLargeException el){
@@ -409,6 +412,7 @@ public class FOOPSController {
                 f = new FOOPS(tempFile.getAbsolutePath(), true);
                 f.fairTest();
                 // tempFile.delete();
+                logger.info("File assessment completed: " + file.getOriginalFilename());
                 return f.exportJSON();
             } catch(FileTooLargeException el){
                 logger.error("Error: ontology is too big! "+ el.getMessage());
