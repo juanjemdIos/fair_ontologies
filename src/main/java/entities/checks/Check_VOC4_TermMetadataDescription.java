@@ -40,6 +40,8 @@ public class Check_VOC4_TermMetadataDescription extends Check {
         this.principle_id ="R1";
         this.description = Constants.VOC4_DESC;
         this.abbreviation = Constants.VOC4;
+        this.action = Constants.VOC4_ACTION;
+        this.recommendedDoc= Constants.VOC4_REC_DOC;
     }
 
     @Override

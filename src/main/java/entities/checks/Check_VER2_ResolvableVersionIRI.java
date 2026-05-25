@@ -36,6 +36,8 @@ public class Check_VER2_ResolvableVersionIRI extends Check {
         this.description = Constants.VER2_DESC;
         this.category_id = Constants.FINDABLE;
         this.abbreviation = Constants.VER2;
+        this.action = Constants.VER2_ACTION;
+        this.recommendedDoc= Constants.VER2_REC_DOC;
     }
 
     @Override

@@ -37,6 +37,8 @@ public class Check_OM1_MinimumMetadata extends Check {
         this.principle_id = "F2";
         this.total_tests_run = Constants.MINIMUM_METADATA.length;
         this.abbreviation = Constants.OM1;
+        this.action = Constants.OM1_ACTION;
+        this.recommendedDoc= Constants.OM1_REC_DOC;
     }
 
     @Override

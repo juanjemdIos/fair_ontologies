@@ -32,6 +32,8 @@ public class Check_HTTP1_AccessProtocol extends Check {
         this.category_id = Constants.ACCESSIBLE;
         this.principle_id = "A1.1";
         this.abbreviation = Constants.HTTP1;
+        this.action = Constants.HTTP1_ACTION;
+        this.recommendedDoc= Constants.HTTP1_REC_DOC;
     }
 
     /**

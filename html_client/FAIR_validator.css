@@ -416,3 +416,21 @@ p#suggest {
     overflow-wrap: break-word;
     word-break: break-word;
 }
+
+.suggestion-dl dt {
+    float: none;        /* ← esto falta */
+    width: auto;        /* ← y esto */
+    text-align: left;
+    display: block;
+    font-weight: bold;
+    margin-top: 6px;
+}
+.suggestion-dl dt::after {
+    content: "";        /* quita los ":" */
+}
+.suggestion-dl dd {
+    float: none;
+    margin-left: 0;
+    display: block;
+    word-break: break-word;
+}

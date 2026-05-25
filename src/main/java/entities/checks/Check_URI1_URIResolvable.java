@@ -40,6 +40,8 @@ public class Check_URI1_URIResolvable extends Check {
         this.principle_id ="F1";
         this.description = Constants.URI1_DESC;
         this.abbreviation = Constants.URI1;
+        this.action = Constants.URI1_ACTION;
+        this.recommendedDoc= Constants.URI1_REC_DOC;
     }
 
     @Override

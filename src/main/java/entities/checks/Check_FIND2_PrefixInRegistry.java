@@ -49,6 +49,8 @@ public class Check_FIND2_PrefixInRegistry extends Check {
         this.total_tests_run = 2;
         //one test to see if the onto is there, another one to check if the namespace is the right one
         this.abbreviation = Constants.FIND2;
+        this.action = Constants.FIND2_ACTION;
+        this.recommendedDoc= Constants.FIND2_REC_DOC;
     }
 
     @Override

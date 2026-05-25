@@ -31,6 +31,8 @@ public class Check_OM5_2_ProvenanceMetadataFull extends Check {
         this.principle_id = "R1.2";
         this.total_tests_run = Constants.PROVENANCE_METADATA_DETAILED.length;
         this.abbreviation = Constants.OM5_2;
+        this.action = Constants.OM5_2_ACTION;
+        this.recommendedDoc= Constants.OM5_2_REC_DOC;
     }
 
     @Override

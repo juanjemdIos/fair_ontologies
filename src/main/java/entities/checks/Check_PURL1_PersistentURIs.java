@@ -31,6 +31,8 @@ public class Check_PURL1_PersistentURIs extends Check {
         this.title = Constants.PURL1_TITLE;
         this.description = Constants.PURL1_DESC;
         this.abbreviation = Constants.PURL1;
+        this.action = Constants.PURL1_ACTION;
+        this.recommendedDoc= Constants.PURL1_REC_DOC;
     }
 
     @Override

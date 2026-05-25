@@ -40,6 +40,8 @@ public class Check_VOC2_VocabReuse extends Check {
         this.principle_id ="I2";
         this.description = Constants.VOC2_DESC;
         this.abbreviation = Constants.VOC2;
+        this.action = Constants.VOC2_ACTION;
+        this.recommendedDoc = Constants.VOC2_REC_DOC;
     }
 
     @Override

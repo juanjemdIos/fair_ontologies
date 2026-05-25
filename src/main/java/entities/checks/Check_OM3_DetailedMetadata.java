@@ -31,6 +31,8 @@ public class Check_OM3_DetailedMetadata extends Check {
         this.principle_id = "R1";
         this.total_tests_run = Constants.DETAILED_METADATA.length;
         this.abbreviation = Constants.OM3;
+        this.action = Constants.OM3_ACTION;
+        this.recommendedDoc= Constants.OM3_REC_DOC;
     }
     /**
      * This check verifies whether the detected metadata is the optional one

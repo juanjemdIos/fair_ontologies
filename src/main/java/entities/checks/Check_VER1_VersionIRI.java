@@ -36,6 +36,8 @@ public class Check_VER1_VersionIRI extends Check {
         this.category_id = Constants.FINDABLE;
         this.total_tests_run = 2; // one for URI version availability, the second one for equivalence check
         this.abbreviation = Constants.VER1;
+        this.action = Constants.VER1_ACTION;
+        this.recommendedDoc= Constants.VER1_REC_DOC;
     }
 
     @Override

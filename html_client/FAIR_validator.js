@@ -692,18 +692,20 @@ function getCheckHTML(check_info) {
               </dl>
             </div>
 
-
-
+            <div class="row mx-0 mt-2 w-100">
+                <a href="javascript:void(0)" onclick="toggleSuggestion('${check_info.abbreviation}')">
+                  <i>Show suggestion</i>
+                </a>
+            </div>
 
             <div class="row m-0" id="${check_info.abbreviation}_SUG" style="display: none">
                 ${getLineHTML()}
              <div class="row mx-0 mt-2 w-100">
-                    <dl>
-                        <dt class="titleSuggest">Recommended Action </dt>
-                        <dd>${'Try this curl command: curl -sH Accept:text/turtle -L https://w3id.org/example'}</dd>
-                        <dt class="titleSuggest">Recommended Documentation </dt>
-                        <dd>${'https://w3id.org/example'}</dd>
-                        <dt class="titleSuggest">Affected Elements </dt>
+                    <dl class="suggestion-dl">
+                        <dt class="titleSuggest">Action </dt>
+                        <dd>${check_info.action || 'No action suggested'}</dd>
+                        <dt class="titleSuggest">Documentation </dt>
+                        <dd>${check_info.recommendedDoc || 'No documentation suggested'}</dd>
                     </dl>
             </div>
 
@@ -841,6 +843,16 @@ function categoryClicked(event, categoryName){
         hideContent(`${categoryName}-checks`);
     }
 
+}
+
+
+function toggleSuggestion(id) {
+  var sugDiv = document.querySelector("#"+id+"_SUG");
+  if (sugDiv.style.display === "none" || sugDiv.style.display === "") {
+    sugDiv.style.display = "block";
+  } else {
+    sugDiv.style.display = "none";
+  }
 }
 
 function arrowClicked(event, id){

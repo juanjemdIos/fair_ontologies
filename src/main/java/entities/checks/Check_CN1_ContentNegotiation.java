@@ -33,6 +33,8 @@ public class Check_CN1_ContentNegotiation extends Check {
         this.total_tests_run = 2;
         this.description = Constants.CN1_DESC;
         this.abbreviation = Constants.CN1;
+        this.action = Constants.CN1_ACTION;
+        this.recommendedDoc= Constants.CN1_REC_DOC;
     }
 
 

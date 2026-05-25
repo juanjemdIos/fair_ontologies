@@ -35,6 +35,8 @@ public class Check_DOC1_HTMLDoc extends Check {
         this.principle_id ="R1";
         this.description = Constants.DOC1_DESC;
         this.abbreviation = Constants.DOC1;
+        this.action = Constants.DOC1_ACTION;
+        this.recommendedDoc= Constants.DOC1_REC_DOC;
     }
 
     @Override

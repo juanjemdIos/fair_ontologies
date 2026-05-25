@@ -32,6 +32,8 @@ public class Check_OM2_RecommendedMetadata extends Check {
         this.principle_id = "R1";
         this.total_tests_run = Constants.RECOMMENDED_METADATA.length;
         this.abbreviation = Constants.OM2;
+        this.action = Constants.OM2_ACTION;
+        this.recommendedDoc= Constants.OM2_REC_DOC;
     }
     /**
      * This check verifies whether the detected metadata is the recommended one

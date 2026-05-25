@@ -46,6 +46,8 @@ public class Check_FIND3_FindOntologyInRegistry extends Check {
         this.category_id = Constants.FINDABLE;
         this.principle_id = "F4";
         this.abbreviation = Constants.FIND3;
+        this.action = Constants.FIND3_ACTION;
+        this.recommendedDoc= Constants.FIND3_REC_DOC;
     }
 
 

@@ -800,5 +800,6 @@ public class Ontology {
                 new StreamDocumentSource(new FileInputStream(ontologyFile), IRI.create(pathOrURI)),
                 loadingConfig
         );
+       
     }
 }

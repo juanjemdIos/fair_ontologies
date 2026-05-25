@@ -37,6 +37,8 @@ public class Check_VOC1_VocabReuseMetadata extends Check {
         this.principle_id ="I2";
         this.description = Constants.VOC1_DESC;
         this.abbreviation = Constants.VOC1;
+        this.action = Constants.VOC1_ACTION;
+        this.recommendedDoc = Constants.VOC1_REC_DOC;
     }
 
     @Override

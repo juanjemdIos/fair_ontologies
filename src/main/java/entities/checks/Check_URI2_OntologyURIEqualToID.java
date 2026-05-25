@@ -40,6 +40,8 @@ public class Check_URI2_OntologyURIEqualToID extends Check {
         this.description = Constants.URI2_DESC;
         this.originalURI = originalURI;
         this.abbreviation = Constants.URI2;
+        this.action = Constants.URI2_ACTION;
+        this.recommendedDoc= Constants.URI2_REC_DOC;
     }
 
     @Override
