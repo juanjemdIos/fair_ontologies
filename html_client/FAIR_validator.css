@@ -417,20 +417,20 @@ p#suggest {
     word-break: break-word;
 }
 
-.suggestion-dl dt {
-    float: none;        /* ← esto falta */
-    width: auto;        /* ← y esto */
+/* .suggestion-dl dt {
+    float: none;     
+    width: auto;        
     text-align: left;
     display: block;
     font-weight: bold;
     margin-top: 6px;
 }
 .suggestion-dl dt::after {
-    content: "";        /* quita los ":" */
-}
+    content: "";     
+} 
 .suggestion-dl dd {
     float: none;
     margin-left: 0;
     display: block;
     word-break: break-word;
-}
+}*/

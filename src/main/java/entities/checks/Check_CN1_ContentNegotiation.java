@@ -41,6 +41,7 @@ public class Check_CN1_ContentNegotiation extends Check {
     @Override
     public void check() {
         super.check();
+        this.action = fillAction(this.action);
         String exp = "";
         if (this.ontology.getHtmlDocumentation() != null){
             exp = "HTML, ";

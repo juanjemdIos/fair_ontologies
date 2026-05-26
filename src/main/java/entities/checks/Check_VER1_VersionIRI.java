@@ -43,6 +43,7 @@ public class Check_VER1_VersionIRI extends Check {
     @Override
     public void check() {
         super.check();
+        this.action = fillAction(this.action);
         try {
             String versionIRI = this.ontology.getVersionIRI();
             String versionInfo = this.ontology.getVersionInfo();

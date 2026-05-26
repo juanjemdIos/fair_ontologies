@@ -701,10 +701,10 @@ function getCheckHTML(check_info) {
             <div class="row m-0" id="${check_info.abbreviation}_SUG" style="display: none">
                 ${getLineHTML()}
              <div class="row mx-0 mt-2 w-100">
-                    <dl class="suggestion-dl">
-                        <dt class="titleSuggest">Action </dt>
-                        <dd>${check_info.action || 'No action suggested'}</dd>
-                        <dt class="titleSuggest">Documentation </dt>
+                    <dl>
+                        <dt>Action</dt>
+                        <dd>${(check_info.action || 'No action suggested').replace(/\n/g, '<br>')}</dd>
+                        <dt>Docs</dt>
                         <dd>${check_info.recommendedDoc || 'No documentation suggested'}</dd>
                     </dl>
             </div>

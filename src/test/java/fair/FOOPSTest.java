@@ -412,4 +412,40 @@ public class FOOPSTest {
         }
     }
 
+    @Test
+    public void testUri1ActionContainsOntologyUri() {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("ontology_100.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            Check_URI1_URIResolvable check = new Check_URI1_URIResolvable(f.getOntology());
+            check.check();
+            System.out.println("URI1 action: " + check.getAction());
+            assertTrue("Action should contain the ontology URI",
+                check.getAction().contains("https://w3id.org/sri"));
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
+
+    @Test
+    public void testVer2ActionContainsVersionIri() {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("ontology_100.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            Check_VER2_ResolvableVersionIRI check = new Check_VER2_ResolvableVersionIRI(f.getOntology());
+            check.check();
+            System.out.println("VER2 action: " + check.getAction());
+            assertTrue("Action should contain the version IRI",
+                check.getAction().contains("https://w3id.org/sri/1.0"));
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
+
 }

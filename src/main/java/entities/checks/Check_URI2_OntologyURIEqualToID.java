@@ -47,6 +47,7 @@ public class Check_URI2_OntologyURIEqualToID extends Check {
     @Override
     public void check() {
         super.check();
+        this.action = fillAction(this.action);
         try {
             String originalOntology = this.ontology.getOntologyURI().strip();
             if (originalOntology.endsWith("/") || originalOntology.endsWith("#")) {

@@ -43,6 +43,9 @@ public class Check_VER2_ResolvableVersionIRI extends Check {
     @Override
     public void check() {
         super.check();
+        System.out.println("VER2 - VersionIRI raw: '" + this.ontology.getVersionIRI() + "'");
+        this.action = fillAction(this.action);
+        System.out.println("VER2 - Action after fillAction: '" + this.action + "'");
         try {
             String versionIRI = this.ontology.getVersionIRI();
             if (versionIRI != null && !"".equals(versionIRI)) {

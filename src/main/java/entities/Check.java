@@ -168,4 +168,18 @@ public abstract class Check {
         LoggerFactory.getLogger(Check.class).info("Checking "+this.id);
     }
 
+    public String fillAction(String template) {
+        if (template == null) return null;
+        return template
+            .replace("$ONTOLOGY_URI", ontology_URI != null ? ontology_URI : "your ontology")
+            .replace("$NAMESPACE_PREFIX", 
+                ontology.getNamespacePrefix() != null ? ontology.getNamespacePrefix() : "your prefix")
+            .replace("$VERSION_IRI", 
+                ontology.getVersionIRI() != null && !ontology.getVersionIRI().isEmpty() 
+                    ? ontology.getVersionIRI() 
+                    : (ontology_URI != null ? ontology_URI : "your version IRI"))
+            .replace("$ONTOLOGY_TITLE", 
+                ontology.getTitle() != null ? ontology.getTitle() : "your ontology");
+    }
+
 }
