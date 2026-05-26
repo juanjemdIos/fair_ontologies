@@ -90,27 +90,6 @@ public class Check_FIND2_PrefixInRegistry extends Check {
 
     private void getPrefix(String urlAPI, String fieldToRetrieveNs, String ontoURI){
         try {
-
-            //local prefix.cc
-             if (urlAPI.contains("prefix.cc")) {
-                String localNs = Utils.getLocalPrefix(fieldToRetrieveNs);
-                if (localNs != null) {
-                    if (localNs.endsWith("/") || localNs.endsWith("#"))
-                        localNs = localNs.substring(0, localNs.length() - 1);
-                    this.total_passed_tests++;
-                    if (localNs.equals(ontoURI)) {
-                        this.total_passed_tests++;
-                        this.status = Constants.OK;
-                        this.explanation = Constants.FIND2_EXPLANATION_OK + " (in local prefix.cc)";
-                    } else {
-                        this.status = Constants.ERROR;
-                        this.explanation = Constants.FIND2_EXPLANATION_OK_ALMOST + ". Prefix found in local prefix.cc: " + localNs;
-                    }
-                    logger.info("Prefix found in local prefix.cc map: " + fieldToRetrieveNs + " → " + localNs);
-                    return; 
-                }
-            } 
-
             URL url = new URL(urlAPI);
             String platform;
             if (urlAPI.contains("prefix.cc")){
@@ -141,6 +120,9 @@ public class Check_FIND2_PrefixInRegistry extends Check {
                         this.status = Constants.ERROR;
                         this.explanation = Constants.FIND2_EXPLANATION_OK_ALMOST+". Prefix found in "+platform+": "+ns;
                     }
+                    if (urlAPI.contains("prefix.cc")) {
+                        Utils.updateLocalPrefix(fieldToRetrieveNs, ns);
+                    }
                 }else {
                     this.status = Constants.ERROR;
                     this.explanation = Constants.FIND2_EXPLANATION_ERROR;
@@ -152,6 +134,25 @@ public class Check_FIND2_PrefixInRegistry extends Check {
 
             in.close();
         }catch(Exception e){
+            //local prefix.cc
+             if (urlAPI.contains("prefix.cc")) {
+                String localNs = Utils.getLocalPrefix(fieldToRetrieveNs);
+                if (localNs != null) {
+                    if (localNs.endsWith("/") || localNs.endsWith("#"))
+                        localNs = localNs.substring(0, localNs.length() - 1);
+                    this.total_passed_tests++;
+                    if (localNs.equals(ontoURI)) {
+                        this.total_passed_tests++;
+                        this.status = Constants.OK;
+                        this.explanation = Constants.FIND2_EXPLANATION_OK + " (in local prefix.cc)";
+                    } else {
+                        this.status = Constants.ERROR;
+                        this.explanation = Constants.FIND2_EXPLANATION_OK_ALMOST + ". Prefix found in local prefix.cc: " + localNs;
+                    }
+                    logger.info("Prefix found in local prefix.cc map: " + fieldToRetrieveNs + " → " + localNs);
+                    return; 
+                }
+            } 
             this.status = Constants.ERROR;
             this.explanation = "Error when retrieving prefix";
         }

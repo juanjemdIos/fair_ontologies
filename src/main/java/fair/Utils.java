@@ -42,6 +42,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.apache.commons.io.IOUtils;
 
 public class Utils {
 
@@ -133,8 +134,6 @@ public class Utils {
     public static HttpURLConnection doNegotiation(String uri, String serialization) throws Exception{
         URL url = new URL(uri);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setConnectTimeout(5000);
-        connection.setReadTimeout(10000);
         // connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
         connection.setRequestMethod("GET");
         connection.setInstanceFollowRedirects(true);
@@ -153,8 +152,6 @@ public class Utils {
         while (redirect) {
             String newUrl = connection.getHeaderField("Location");
             connection = (HttpURLConnection) new URL(newUrl).openConnection();
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(10000);
             // connection.setRequestProperty("User-Agent", "Mozilla/5.0...");
             if(serialization!=null) {
                 connection.setRequestProperty("Accept", serialization);
@@ -226,19 +223,32 @@ public class Utils {
                 .replace("\t", "\\t");
     }
 
-    static {
-        try (InputStream in = Utils.class.getResourceAsStream("/prefixcc.json")) {
-            String json = new String(in.readAllBytes(), StandardCharsets.UTF_8);
-            JsonObject ctx = JsonParser.parseString(json)
-                .getAsJsonObject();
-            ctx.keySet().forEach(k -> PREFIX_CC_MAP.put(k, ctx.get(k).getAsString()));
-            logger.info("Loaded " + PREFIX_CC_MAP.size() + " prefixes from local prefixcc.json");
-        } catch (Exception e) {
-            logger.warn("Could not load local prefix.cc map: " + e.getMessage());
-        }
-    }
+
 
     public static String getLocalPrefix(String prefix) {
+        if (PREFIX_CC_MAP.isEmpty()) {
+            try (InputStream in = Utils.class.getResourceAsStream("/prefixcc.json")) {
+                if (in != null) {
+                    StringWriter writer = new StringWriter();
+                    IOUtils.copy(in, writer, "UTF-8");
+                    JsonObject ctx = JsonParser.parseString(writer.toString()).getAsJsonObject();
+                    ctx.keySet().forEach(k -> PREFIX_CC_MAP.put(k, ctx.get(k).getAsString()));
+                    logger.info("Loaded " + PREFIX_CC_MAP.size() + " prefixes from local prefixcc.json");
+                }
+            } catch (Exception e) {
+                logger.error("Could not load local prefixcc.json", e);
+            }
+        }
         return PREFIX_CC_MAP.get(prefix);
+    }
+
+    public static void updateLocalPrefix(String prefix, String namespace) {
+        if (prefix != null && namespace != null) {
+            String current = PREFIX_CC_MAP.get(prefix);
+            if (current == null || !current.equals(namespace)) {
+                PREFIX_CC_MAP.put(prefix, namespace);
+                logger.info("Updated local prefix.cc cache: " + prefix + " → " + namespace);
+            }
+        }
     }
 }
