@@ -700,17 +700,16 @@ function getCheckHTML(check_info) {
 
             <div class="row m-0" id="${check_info.abbreviation}_SUG" style="display: none">
                 ${getLineHTML()}
-             <div class="row mx-0 mt-2 w-100">
+              <div class="row mx-0 mt-2 w-100">
                     <dl>
                         <dt>Action</dt>
                         <dd>${(check_info.action || 'No action suggested').replace(/\n/g, '<br>')}</dd>
                         <dt>Docs</dt>
                         <dd>${check_info.recommendedDoc || 'No documentation suggested'}</dd>
                     </dl>
-            </div>
-
-            ${affected_URIs_HTML}
-            ${reference_URIs_HTML}
+              </div>
+              ${affected_URIs_HTML}
+              ${reference_URIs_HTML}
           </div>
         </div>
       `;
