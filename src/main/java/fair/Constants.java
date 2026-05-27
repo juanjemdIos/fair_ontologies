@@ -342,7 +342,9 @@ public class Constants {
     public static final String PREFIX_CC = "http://prefix.cc/";
 
     //to do: ontobee (http://www.ontobee.org/sparql), bioportal,
-
+    public static final String ONTOBEE_SPARQL_ENDPOINT = "https://sparql.hegroup.org/sparql/";
+    public static final String BIOPORTAL_BASE_URL = "https://data.bioontology.org";
+    public static final String BIOPORTAL_API_KEY = ""; // not sure about this. Doc bioportal says : "An API Key is required to access any API call"
 
     /* FAIR Categories*/
     public static final String FINDABLE = "Findable";
