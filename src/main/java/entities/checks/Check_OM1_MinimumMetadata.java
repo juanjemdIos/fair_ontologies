@@ -34,11 +34,11 @@ public class Check_OM1_MinimumMetadata extends Check {
         this.id = Constants.OM1_URL;
         this.title = Constants.OM1_TITLE;
         this.description = Constants.OM1_DESC;
+        this.abbreviation = Constants.OM1; 
         this.principle_id = "F2";
         this.total_tests_run = Constants.MINIMUM_METADATA.length;
-        this.abbreviation = Constants.OM1;
-        this.action = Constants.OM1_ACTION;
         this.recommendedDoc= Constants.OM1_REC_DOC;
+        this.guidance = Constants.OM1_GUIDANCE;
     }
 
     @Override
@@ -59,6 +59,7 @@ public class Check_OM1_MinimumMetadata extends Check {
         }else {
             this.status = Constants.ERROR;
             explanation = Constants.OM1_EXPLANATION_ERROR + exp.substring(0, exp.length() - 2);
+            this.guidance = Constants.OM1_GUIDANCE;
         }
 
     }

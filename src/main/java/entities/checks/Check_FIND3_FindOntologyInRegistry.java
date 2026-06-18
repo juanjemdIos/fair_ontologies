@@ -46,7 +46,7 @@ public class Check_FIND3_FindOntologyInRegistry extends Check {
         this.category_id = Constants.FINDABLE;
         this.principle_id = "F4";
         this.abbreviation = Constants.FIND3;
-        this.action = Constants.FIND3_ACTION;
+        this.guidance = Constants.FIND3_GUIDANCE;
         this.recommendedDoc= Constants.FIND3_REC_DOC;
     }
 
@@ -102,10 +102,12 @@ public class Check_FIND3_FindOntologyInRegistry extends Check {
                     // TO DO: Try ontobee, bioportal. For now we just report error
                     this.status = Constants.ERROR;
                     this.explanation = Constants.FIND3_EXPLANATION_ERROR;
+                    this.guidance = Constants.FIND3_GUIDANCE;
                 }
             }catch(Exception e){
                 this.status = Constants.ERROR;
                 this.explanation = Constants.FIND3_EXPLANATION_ERROR;
+                this.guidance = Constants.FIND3_GUIDANCE;
                 // TO DO: Try ontobee, bioportal. For now we just report error
             }
 
@@ -113,6 +115,7 @@ public class Check_FIND3_FindOntologyInRegistry extends Check {
         }catch(Exception e){
             this.status = Constants.ERROR;
             this.explanation = Constants.FIND3_EXPLANATION_ERROR;
+            this.guidance = Constants.FIND3_GUIDANCE;
         }
     }
 }

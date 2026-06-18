@@ -31,8 +31,8 @@ public class Check_OM3_DetailedMetadata extends Check {
         this.principle_id = "R1";
         this.total_tests_run = Constants.DETAILED_METADATA.length;
         this.abbreviation = Constants.OM3;
-        this.action = Constants.OM3_ACTION;
         this.recommendedDoc= Constants.OM3_REC_DOC;
+        this.guidance = Constants.OM3_GUIDANCE;
     }
     /**
      * This check verifies whether the detected metadata is the optional one
@@ -56,6 +56,7 @@ public class Check_OM3_DetailedMetadata extends Check {
         }else {
             this.status = Constants.ERROR;
             explanation = Constants.OM3_EXPLANATION + exp.substring(0, exp.length() - 2);
+            this.guidance = Constants.OM3_GUIDANCE;
         }
 
         StringBuilder optional = new StringBuilder();
@@ -67,6 +68,7 @@ public class Check_OM3_DetailedMetadata extends Check {
         if (!optional.toString().isEmpty()){
             explanation += ". Warning: The following OPTIONAL detailed metadata could not be found: "+
                     optional.substring(0,optional.length() -2) + ". Please consider adding them if appropriate.";
+            this.guidance = Constants.OM3_GUIDANCE;
         }
 
     }

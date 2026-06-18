@@ -87,17 +87,19 @@ public class Constants {
     public static String CN1_DESC;
     public static final String CN1_DESC_EXPLANATION_OK = "Ontology available in: ";
     public static final String CN1_DESC_EXPLANATION_ERROR = "Ontology not available in RDF or HTML";
-    public static final String CN1_ACTION = "Set up content negotiation for your ontology (e.g., using Widoco, rdflib). Configure htaccess and verify with: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI";
+//     public static final String CN1_ACTION = "Set up content negotiation for your ontology (e.g., using Widoco, rdflib). Configure htaccess and verify with: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI";
     public static final String CN1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/#content-negotiation";
 
+    public static final String CN1_GUIDANCE = "Set up content negotiation using htaccess. Show how to put htaccess in your server. Tools like Widoco or rdflib can help. Finally, verify with: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI.";
     //DOC1: HTML doc
     public static final String DOC1 = "DOC1";
     public static String DOC1_TITLE;
     public static String DOC1_DESC; // = "This check verifies if the ontology has an HTML documentation";
     public static final String DOC1_EXPLANATION_OK = "Ontology available in HTML";
     public static final String DOC1_EXPLANATION_ERROR = "Ontology not available in HTML";
-    public static final String DOC1_ACTION = "Generate HTML documentation with Widoco (https://github.com/dgarijo/Widoco) or OnToology (https://ontoology.linkeddata.es/).";
+//     public static final String DOC1_ACTION = "Generate HTML documentation with Widoco (https://github.com/dgarijo/Widoco) or OnToology (https://ontoology.linkeddata.es/).";
     public static final String DOC1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/#content-negotiation";
+    public static final String DOC1_GUIDANCE = "Generate HTML documentation with a tool like Widoco (https://github.com/dgarijo/Widoco). Follow the Widoco/OnToology (https://ontoology.linkeddata.es/) README for instructions.";
 
     //RDF1: Check if there is an RDF serialization of an ontology
     public static final String RDF1 = "RDF1";
@@ -106,8 +108,11 @@ public class Constants {
             //"(ttl, n3, rdf/xml, json-ld)";
     public static final String RDF1_EXPLANATION_OK = "Ontology available in RDF";
     public static final String RDF1_EXPLANATION_ERROR = "Ontology not available in RDF (RDF/XML, Turtle, JSON-LD or N3)";
-    public static final String RDF1_ACTION = "Provide an RDF serialization using Protégé (https://protege.stanford.edu/) or Chowlk (https://chowlk.linkeddata.es/).";
+//     public static final String RDF1_ACTION = "Provide an RDF serialization using Protégé (https://protege.stanford.edu/) or Chowlk (https://chowlk.linkeddata.es/).";
     public static final String RDF1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String RDF1_GUIDANCE = "Implement your ontology using an ontology editor like Protégé (https://protege.stanford.edu/) or Chowlk (https://chowlk.linkeddata.es/). " +
+                                                "Try opening the ontology in tools like Protégé or Widoco";
+
     //PURL1: Use of persistent URIs
     public static final String PURL1 = "PURL1";
     public static String PURL1_TITLE;// = "Persistent URL";
@@ -117,8 +122,10 @@ public class Constants {
     public static final String PURL1_EXPLANATION_ERROR = "the ontology URI does not follow any of the schemes " +
             "followed by known registers of persistent URIs. " +
             "We checked w3id, purl, DOI, W3C, perma.cc, linked.data.gov.au, data.europa.eu and dbpedia.org";
-    public static final String PURL1_ACTION = "Use a persistent URI for your ontology (e.g., w3id, purl, DOI, or a W3C URL). If your URI is already persistent but we missed it, please open an issue at https://github.com/oeg-upm/fair_ontologies/issues";
+//     public static final String PURL1_ACTION = "Use a persistent URI for your ontology (e.g., w3id, purl, DOI, or a W3C URL). If your URI is already persistent but we missed it, please open an issue at https://github.com/oeg-upm/fair_ontologies/issues";
     public static final String PURL1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String PURL1_GUIDANCE = "Show how to do a w3id id using a PR. " +
+                                                "In case your URI is persistent and we haven't detected it, please open an issue https://github.com/oeg-upm/fair_ontologies/issues";
 
     // Ontology metadata
     //minimum
@@ -127,8 +134,20 @@ public class Constants {
     public static String OM1_DESC;
     public static final String OM1_EXPLANATION_OK = "All the minimum metadata were found!";
     public static final String OM1_EXPLANATION_ERROR = "The following metadata was not found: ";
-    public static final String OM1_ACTION = "Add minimum metadata: title, description, license, versionIRI, creator, creation date, namespace URI and prefix. See the template at https://chowlk.linkeddata.es/notation#ontology_metadata";
+//     public static final String OM1_ACTION = "Add minimum metadata: title, description, license, versionIRI, creator, creation date, namespace URI and prefix. See the template at https://chowlk.linkeddata.es/notation#ontology_metadata";
     public static final String OM1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM1_GUIDANCE = "Add the recommended properties. The Turtle code below shows an example:\n\n" +
+    "<https://w3id.org/example#> a owl:Ontology ;\n" +
+    "    dc:title \"The example ontology\"@en ;\n" +
+    "    dc:description \"Brief description of your ontology.\"@en ;\n" +
+    "    dc:created \"2021-01-01\"^^xsd:date ;\n" +
+    "    dc:creator <https://w3id.org/people#AuthorURI> ;\n" +
+    "    dc:contributor <https://w3id.org/people#AContributorURI> ;\n" +
+    "    dc:license <https://creativecommons.org/licenses/by/4.0/> ;\n" +
+    "    vann:preferredNamespaceUri <https://w3id.org/example#> ;\n" +
+    "    vann:preferredNamespacePrefix \"choosenprefix\" ;\n" +
+    "    owl:versionIRI <https://w3id.org/example/1.0.1> .\n\n" +
+    "If you are using Chowlk you can use the graphical template for minimum metadata: https://chowlk.linkeddata.es/notation#ontology_metadata";
 
     //recommended
     public static final String OM2 = "OM2";
@@ -138,8 +157,21 @@ public class Constants {
             //"It also checks if [contributor] is "  +
             //"present, but with no penalty (as no all ontologies may have a contributor)";
     public static final String OM2_EXPLANATION = OM1_EXPLANATION_ERROR;
-    public static final String OM2_ACTION = "Include the following recommended metadata in your ontology: namespace prefix, version info, creation date, and citation. It is also recommended to include contributor information.";
+//     public static final String OM2_ACTION = "Include the following recommended metadata in your ontology: namespace prefix, version info, creation date, and citation. It is also recommended to include contributor information.";
     public static final String OM2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM2_GUIDANCE = "Add recommended metadata: NS Prefix, version info, creation date, citation, contributor.\n\n" +
+    "<https://w3id.org/example#> a owl:Ontology ;\n" +
+    "    dcterms:contributor <https://w3id.org/people#AContributorURI> ;\n" +
+    "    dcterms:created \"2021-01-01\"^^xsd:date ;\n" +
+    "    dcterms:creator <https://w3id.org/people#AuthorURI> ;\n" +
+    "    dcterms:description \"Brief description of your ontology.\"@en ;\n" +
+    "    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;\n" +
+    "    dcterms:title \"The example ontology\"@en ;\n" +
+    "    vann:preferredNamespacePrefix \"choosenprefix\" ;\n" +
+    "    vann:preferredNamespaceUri <https://w3id.org/example#> ;\n" +
+    "    owl:priorVersion <https://w3id.org/example/1.0.0> ;\n" +
+    "    owl:versionIRI <https://w3id.org/example/1.0.1> ;\n" +
+    "    owl:versionInfo \"0.0.1\" .";
 
     //optional
     public static final String OM3 = "OM3";
@@ -149,9 +181,10 @@ public class Constants {
             //"are present in the ontology. It also checks if [previous version, backward compatibility, modified] are " +
             //"present, but with no penalty (as no all ontologies may have, e.g., a previous version)";
     public static final String OM3_EXPLANATION = OM1_EXPLANATION_ERROR;
-    public static final String OM3_ACTION = "Include the following detailed metadata in your ontology: doi, publisher, logo, status, source, issued date. " +
-                "It is also recommended to include previous version, backward compatibility and modified information.";
+//     public static final String OM3_ACTION = "Include the following detailed metadata in your ontology: doi, publisher, logo, status, source, issued date. " +
+//                 "It is also recommended to include previous version, backward compatibility and modified information.";
     public static final String OM3_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM3_GUIDANCE = "Add detailed metadata: DOI, publisher, logo, status, source, issued date. Same approach as OM2 with a more complete snippet.";
 
     //license
     public static final String OM4_1 = "OM4_1";
@@ -160,8 +193,10 @@ public class Constants {
     public static final String OM4_1_EXPLANATION_OK = "A license was found";
     public static final String OM4_1_EXPLANATION_OK_RIGHTS = "A license was not found, but we found a rights statement: ";
     public static final String OM4_1_EXPLANATION_ERROR = "License or rights not found";
-    public static final String OM4_1_ACTION = "Include a license using dcterms:license. Use common licenses from SPDX (https://spdx.org/licenses/) or Licensius (https://rdflicense.linkeddata.es/).";
+    //     public static final String OM4_1_ACTION = "Include a license using dcterms:license. Use common licenses from SPDX (https://spdx.org/licenses/) or Licensius (https://rdflicense.linkeddata.es/).";
     public static final String OM4_1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM4_1_GUIDANCE = "Add a license to your ontology using common licenses. Check SPDX or Licensius (https://rdflicense.linkeddata.es/) for standard license URIs. \n\n" +
+                "dcterms:license <https://creativecommons.org/licenses/by/4.0/> .";
 
     //license_resolvable
     public static final String OM4_2 = "OM4_2";
@@ -169,8 +204,10 @@ public class Constants {
     public static String OM4_2_DESC; // = "This check verifies if the ontology license is resolvable";
     public static final String OM4_2_EXPLANATION_OK = "License could be resolved";
     public static final String OM4_2_EXPLANATION_ERROR = "The license used could not be resolved";
-    public static final String OM4_2_ACTION = "Use a resolvable license for the ontology (e.g., Creative Commons licenses)";
+    //     public static final String OM4_2_ACTION = "Use a resolvable license for the ontology (e.g., Creative Commons licenses)";
     public static final String OM4_2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM4_2_GUIDANCE = "Make sure the license URI is resolvable (returns content). Test with curl. \n" +
+            "curl -sI <LICENSE_URI>";
 
     //provenance
     public static final String OM5_1 = "OM5_1";
@@ -179,16 +216,18 @@ public class Constants {
     // "[author, creation date]. This check also verifies whether [contributor, previous version] are present" +
     //         ", but with no penalty (as no all ontologies may have a previous version or a contributor)";
     public static final String OM5_1_EXPLANATION = "The following provenance information was not found: ";
-    public static final String OM5_1_ACTION = "Include the following provenance information in your ontology: author, creation date. It is also recommended to include contributor and previous version information.";
+    //     public static final String OM5_1_ACTION = "Include the following provenance information in your ontology: author, creation date. It is also recommended to include contributor and previous version information.";
     public static final String OM5_1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM5_1_GUIDANCE = "Add basic provenance: author and creation date. Optionally add contributor and previous version.";
 
     public static final String OM5_2 = "OM5_2";
     public static String OM5_2_TITLE; // = "Detailed provenance metadata";
     public static String OM5_2_DESC; // = "This check verifies if detailed provenance information is available " +
     // "for the ontology: [issued date, publisher]";
     public static final String OM5_2_EXPLANATION= OM5_1_EXPLANATION;
-    public static final String OM5_2_ACTION = "Include detailed provenance information in your ontology: issued date, publisher.";
+    //     public static final String OM5_2_ACTION = "Include detailed provenance information in your ontology: issued date, publisher.";
     public static final String OM5_2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String OM5_2_GUIDANCE = "Add detailed provenance: issued date and publisher.";
 
     //Findability
     public static final String FIND1 = "FIND1";
@@ -196,8 +235,9 @@ public class Constants {
     public static String FIND1_DESC; //  = "This check verifies if an ontology prefix is available";
     public static final String FIND1_EXPLANATION_OK= "Prefix declaration found in the ontology";
     public static final String FIND1_EXPLANATION_ERROR= "Prefix declaration not found in the ontology";
-    public static final String FIND1_ACTION = "Declare a prefix for your ontology using vann:preferredNamespacePrefix.";
+//     public static final String FIND1_ACTION = "Declare a prefix for your ontology using vann:preferredNamespacePrefix.";
     public static final String FIND1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String FIND1_GUIDANCE = "Use vann:preferredNamespacePrefix to declare the ontology prefix.";
 
     public static final String FIND2 = "FIND2";
     public static String FIND2_TITLE; //  = "Prefix is in registry";
@@ -207,9 +247,12 @@ public class Constants {
     public static final String FIND2_EXPLANATION_OK= "Prefix declaration found with correct namespace";
     public static final String FIND2_EXPLANATION_OK_ALMOST= "Prefix declaration found, but with incorrect namespace";
     public static final String FIND2_EXPLANATION_ERROR= "Prefix declaration not found in prefix.cc or LOV";
-    public static final String FIND2_ACTION = "If your prefix is not registered, add it to LOV or prefix.cc. If it already exists, try a variation (e.g., adding 'ont'). Make sure the prefix resolves to your namespace.";
+    //     public static final String FIND2_ACTION = "If your prefix is not registered, add it to LOV or prefix.cc. If it already exists, try a variation (e.g., adding 'ont'). Make sure the prefix resolves to your namespace.";
     public static final String FIND2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
+    public static final String FIND2_GUIDANCE = "If prefix not found: register the ontology in LOV or prefix.cc. "+
+                                                "If pre-publication, check the prefix is not already in use. " +
+                                                "If prefix exists but conflicts, suggest a variation (e.g., adding 'ont' or using the first letters of the title).";
 
     public static final String FIND3 = "FIND3";
     public static String FIND3_TITLE;//  = "Ontology in metadata registry";
@@ -217,17 +260,19 @@ public class Constants {
     public static final String FIND3_EXPLANATION_OK= "Ontology namespace URI found in";
     public static final String FIND3_EXPLANATION_OK_ANN = "Otology is included in a data catalog.";
     public static final String FIND3_EXPLANATION_ERROR= "Ontology not found in a public registry";
-    public static final String FIND3_ACTION = "Register your ontology in a public registry such as LOV (https://lov.linkeddata.es/) or OntoPortal (https://ontoportal.org/).";
+//     public static final String FIND3_ACTION = "Register your ontology in a public registry such as LOV (https://lov.linkeddata.es/) or OntoPortal (https://ontoportal.org/).";
     public static final String FIND3_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String FIND3_GUIDANCE = "Register the ontology in LOV (Linked Open Vocabularies) or an Ontology Portal (e.g., OntoPortal). If not found, suggest how to register.";
 
     public static final String FIND3_BIS = "FIND_3_BIS";
     public static String FIND3_BIS_TITLE;//  = "Metadata are accessible, even when ontology is not";
     public static String FIND3_BIS_DESC;//  = "Metadata are accessible even when the " +
     // "ontology is no longer available. Since the metadata is usually included in the ontology, this check " +
     //      "verifies whether the ontology is registered in a public metadata registry (LOV)";
-    public static String FIND3_BIS_ACTION= "Register your ontology in a public registry such as LOV (https://lov.linkeddata.es/) or OntoPortal (https://ontoportal.org/).";
+//     public static String FIND3_BIS_ACTION= "Register your ontology in a public registry such as LOV (https://lov.linkeddata.es/) or OntoPortal (https://ontoportal.org/).";
     public static String FIND3_BIS_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
+    public static final String FIND3_BIS_GUIDANCE = "Same as FIND3: Register the ontology in a public metadata registry like LOV or an Ontology Portal (e.g., OntoPortal).";
 
     //Access protocol
     public static final String HTTP1 = "HTTP1";
@@ -236,8 +281,9 @@ public class Constants {
     // "protocol (HTTP or HTTPS)";
     public static final String HTTP1_EXPLANATION_OK= "The ontology uses an open protocol";
     public static final String HTTP1_EXPLANATION_ERROR= "The ontology does not use an open protocol";
-    public static final String HTTP1_ACTION = "Change your URIs to use HTTP or HTTPS. See https://www.w3.org/TR/ld-bp/#HTTP-URIS";
+    //     public static final String HTTP1_ACTION = "Change your URIs to use HTTP or HTTPS. See https://www.w3.org/TR/ld-bp/#HTTP-URIS";
     public static final String HTTP1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String HTTP1_GUIDANCE = "Change your URIs to use HTTP or HTTPS (only applicable if the ontology was downloaded). See https://www.w3.org/TR/ld-bp/#HTTP-URIS";
 
     //URI1: URI is resolvable
     public static final String URI1 = "URI1";
@@ -246,8 +292,9 @@ public class Constants {
     //"document is resolvable";
     public static final String URI1_EXPLANATION_OK = "Ontology URL is resolvable";
     public static final String URI1_EXPLANATION_ERROR = "Ontology URL is not resolvable";
-    public static final String URI1_ACTION = "Make sure your ontology URI resolves. Try: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI.\n Alternatively, try opening the ontology in tools like Protégé or Widoco.";
+//     public static final String URI1_ACTION = "Make sure your ontology URI resolves. Try: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI.\n Alternatively, try opening the ontology in tools like Protégé or Widoco.";
     public static final String URI1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String URI1_GUIDANCE = "Check with curl (TTL serialization): curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI. Try opening the ontology in tools like Protégé or Widoco.";
 
     //URI2: Ontology URI is the URI used (only if ontology was loaded through URI)
     public static final String URI2 = "URI2";
@@ -258,9 +305,10 @@ public class Constants {
             "was not found.";
     public static final String URI2_EXPLANATION_ERROR = "Ontology URI is different from ontology ID. Your ontology" +
             "URI (e.g., its w3id) should be the same as the one used within the ontology itself";
-    public static final String URI2_ACTION = "Make sure the ontology URI ($ONTOLOGY_URI) matches the ontology ID declared in the document.";
+//     public static final String URI2_ACTION = "Make sure the ontology URI ($ONTOLOGY_URI) matches the ontology ID declared in the document.";
     public static final String URI2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
+    public static final String URI2_GUIDANCE = "Check that the ontology URI ($ONTOLOGY_URI) matches the ontology ID. Ensure they are the same value.";
 
     //version IRI tests
     public static final String VER1 = "VER1";
@@ -269,9 +317,11 @@ public class Constants {
             //"whether the id is unique (i.e., different from the ontology URI)";
     public static final String VER1_EXPLANATION_OK= "Version IRI defined, IRI is different from ontology URI";
     public static final String VER1_EXPLANATION_ERROR= "Version IRI "; // to complete on whether it's found or duplicate
-    public static final String VER1_ACTION = "Generate a version IRI annotation including version information for the ontology. Note that it should be different from the ontology URI:\n<$ONTOLOGY_URI> rdf:type owl:Ontology ;\n    owl:versionIRI <$ONTOLOGY_URI/<version>> .";
+//     public static final String VER1_ACTION = "Generate a version IRI annotation including version information for the ontology. Note that it should be different from the ontology URI:\n<$ONTOLOGY_URI> rdf:type owl:Ontology ;\n    owl:versionIRI <$ONTOLOGY_URI/<version>> .";
     public static final String VER1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-
+    public static final String VER1_GUIDANCE = "Add a version IRI annotation different from the ontology URI.\n\n" +
+    "<$ONTOLOGY_URI> rdf:type owl:Ontology ;\n" +
+    "    owl:versionIRI <$ONTOLOGY_URI/<version>> .";
 
     public static final String VER2 = "VER2";
     public static String VER2_TITLE;// = "Version IRI resolves";
@@ -280,9 +330,11 @@ public class Constants {
     public static final String VER2_EXPLANATION_ERROR_NOT_AVAILABLE= "Version IRI is not available, " +
             "so it could not be resolved";
     public static final String VER2_EXPLANATION_ERROR= "Version IRI could not be resolved";
-    public static final String VER2_ACTION = "Make sure your version IRI resolves. Try: curl -sH \"Accept:text/turtle\" -L $VERSION_IRI";
+//     public static final String VER2_ACTION = "Make sure your version IRI resolves. Try: curl -sH \"Accept:text/turtle\" -L $VERSION_IRI";
     public static final String VER2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-
+    public static final String VER2_GUIDANCE = "Run the versionIRI with curl to verify it resolves:\n\n" +
+    "curl -sH \"Accept:text/turtle\" -L $VERSION_IRI\n\n" +
+    "If no versionIRI is available, add one first (see VER1 guidance).";
 
     //reuse
     public static final String VOC1 = "VOC1";
@@ -291,8 +343,9 @@ public class Constants {
     // "declaring metadata terms";
     public static final String VOC1_EXPLANATION_OK = "Ontology reuses existing vocabularies for declaring metadata. ";
     public static final String VOC1_EXPLANATION_ERROR = "The ontology does not reuse vocabularies for common metadata";
-    public static final String VOC1_ACTION = "Reuse existing vocabularies for declaring metadata terms (e.g., Dublin Core, PROV-O, etc.)";
+//     public static final String VOC1_ACTION = "Reuse existing vocabularies for declaring metadata terms (e.g., Dublin Core, PROV-O, etc.)";
     public static final String VOC1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
+    public static final String VOC1_GUIDANCE = "If a namespace not in Widoco best practices is used, check Widoco best practices or MOD (Metadata for Ontology Description).";
 
     public static final String VOC2 = "VOC2";
     public static String VOC2_TITLE;//  = "Vocabulary reuse";
@@ -301,9 +354,10 @@ public class Constants {
     public static final String VOC2_EXPLANATION_OK_IMPORT = "The ontology imports the following vocabularies: ";
     public static final String VOC2_EXPLANATION_OK_EXTEND = "The ontology reuses/extends existing vocabularies.";
     public static final String VOC2_EXPLANATION_ERROR = "The ontology does not import/extend other vocabularies.";
-    public static final String VOC2_ACTION = "Look for ontologies to reuse in Linked Open Vocabularies (https://lov.linkeddata.es/).";
+//     public static final String VOC2_ACTION = "Look for ontologies to reuse in Linked Open Vocabularies (https://lov.linkeddata.es/).";
     public static final String VOC2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
+    public static final String VOC2_GUIDANCE = "Look for ontologies to reuse in available registries like Linked Open Vocabularies (https://lov.linkeddata.es/) or search engines.";
 
     public static final String VOC3 = "VOC3";
     public static String VOC3_TITLE;//  = "Documentation: labels";
@@ -311,9 +365,11 @@ public class Constants {
     // "labels (rdfs:label in OWL vocabularies, skos:prefLabel in SKOS vocabularies)";
     public static final String VOC3_EXPLANATION_OK = "Labels found for all ontology terms";
     public static final String VOC3_EXPLANATION_ERROR = "Labels found for "; // percentage
-    public static final String VOC3_ACTION = "Include labels for all terms. Example:\n:myClass rdfs:label \"My Class\"@en .\n:myConcept skos:prefLabel \"My Concept\"@en .";
+    //     public static final String VOC3_ACTION = "Include labels for all terms. Example:\n:myClass rdfs:label \"My Class\"@en .\n:myConcept skos:prefLabel \"My Concept\"@en .";
     public static final String VOC3_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
+    public static final String VOC3_GUIDANCE = "Add rdfs:label (or skos:prefLabel for SKOS) to all ontology terms. \n\n" +
+                                                "ex:MyClass rdfs:label 'My Class'@en .";
 
     public static final String VOC4 = "VOC4";
     public static String VOC4_TITLE;// = "Documentation: definitions";
@@ -321,9 +377,12 @@ public class Constants {
     //"descriptions (rdfs:comment in OWL vocabularies, skos:definition in SKOS vocabularies)";
     public static final String VOC4_EXPLANATION_OK= "Descriptions found for all ontology terms";
     public static final String VOC4_EXPLANATION_ERROR= "Descriptions found for "; // percentage
-    public static final String VOC4_ACTION = "Include descriptions for all terms. Example:\n:myClass rdfs:comment \"My Class\"@en .\n:myConcept skos:definition \"My Concept\"@en .";
+    //     public static final String VOC4_ACTION = "Include descriptions for all terms. Example:\n:myClass rdfs:comment \"My Class\"@en .\n:myConcept skos:definition \"My Concept\"@en .";
     public static final String VOC4_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
     
+    public static final String VOC4_GUIDANCE = "Add rdfs:comment (or skos:definition for SKOS) to all ontology terms. \n\n" +
+                                                "ex:MyClass rdfs:comment 'Description of My Class'@en .";
+
     static{
         Properties props = new Properties();
         ClassLoader classLoader = Constants.class.getClassLoader();
@@ -637,6 +696,7 @@ public class Constants {
             "    \"@id\": \"$RESULT_ID\",\n" +
             "    \"@type\": \"https://w3id.org/ftr#TestResult\",\n" +
             "    \"description\": \"$RESULT_DESCRIPTION\",\n" +
+            "    \"suggestion\": \"$RESULT_GUIDANCE\",\n" +
             "    \"identifier\": {\n" +
             "        \"@id\": \"$RESULT_ID\"\n" +
             "    },\n" +

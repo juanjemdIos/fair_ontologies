@@ -40,7 +40,7 @@ public class Check_VOC4_TermMetadataDescription extends Check {
         this.principle_id ="R1";
         this.description = Constants.VOC4_DESC;
         this.abbreviation = Constants.VOC4;
-        this.action = Constants.VOC4_ACTION;
+        this.guidance = Constants.VOC4_GUIDANCE;
         this.recommendedDoc= Constants.VOC4_REC_DOC;
     }
 
@@ -70,11 +70,13 @@ public class Check_VOC4_TermMetadataDescription extends Check {
                         affected_elements.add(term);
                     }
                 }
+                this.guidance = Constants.VOC4_GUIDANCE;
             }
         }catch(Exception e){
             status = Constants.ERROR;
             explanation = Constants.ERROR_METADATA;
             this.total_tests_run = 1;
+            this.guidance = Constants.VOC4_GUIDANCE;
         }
     }
 

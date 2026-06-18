@@ -34,7 +34,7 @@ public class Check_OM4_1_License extends Check {
         this.category_id = Constants.REUSABLE;
         this.principle_id ="R1.1";
         this.abbreviation = Constants.OM4_1;
-        this.action = Constants.OM4_1_ACTION;
+        this.guidance = Constants.OM4_1_GUIDANCE;
         this.recommendedDoc= Constants.OM4_1_REC_DOC;
     }
 
@@ -59,6 +59,7 @@ public class Check_OM4_1_License extends Check {
             }else{
                 this.status = Constants.ERROR;
                 this.explanation = Constants.OM4_1_EXPLANATION_ERROR;
+                this.guidance = Constants.OM4_1_GUIDANCE;
             }
         }
 

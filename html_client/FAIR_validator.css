@@ -416,7 +416,12 @@ p#suggest {
     overflow-wrap: break-word;
     word-break: break-word;
 }
-
+div[id$="_SUG"] p {
+    padding-left: 1rem;
+}
+.suggestion-dt{
+    color: #396FAA;
+}
 /* .suggestion-dl dt {
     float: none;     
     width: auto;        

@@ -40,7 +40,7 @@ public class Check_VOC2_VocabReuse extends Check {
         this.principle_id ="I2";
         this.description = Constants.VOC2_DESC;
         this.abbreviation = Constants.VOC2;
-        this.action = Constants.VOC2_ACTION;
+        this.guidance = Constants.VOC2_GUIDANCE;
         this.recommendedDoc = Constants.VOC2_REC_DOC;
     }
 
@@ -68,11 +68,13 @@ public class Check_VOC2_VocabReuse extends Check {
                 } else {
                     status = Constants.ERROR;
                     explanation = Constants.ERROR_VOC;
+                    this.guidance = Constants.VOC2_GUIDANCE;
                 }
             }
         }catch(Exception e){
             status = Constants.ERROR;
             explanation = Constants.VOC2_EXPLANATION_ERROR;
+            this.guidance = Constants.VOC2_GUIDANCE;
         }
         //to avoid returning empty lists
         if(reference_resources.isEmpty()){
