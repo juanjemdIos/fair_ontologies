@@ -58,7 +58,8 @@ public class Check_OM5_2_ProvenanceMetadataFull extends Check {
         } else {
             this.status = Constants.ERROR;
             explanation = Constants.OM5_2_EXPLANATION + exp.substring(0, exp.length() - 2);
-            this.guidance = Constants.OM5_2_GUIDANCE;
+            this.guidance = "Add basic provenance metadata (required and optional). The Turtle code below shows an example:<br>"
+                + buildMetadataSnippet(Constants.PROVENANCE_METADATA_BASIC, Constants.PROVENANCE_METADATA_OPTIONAL);
         }
     }
 }

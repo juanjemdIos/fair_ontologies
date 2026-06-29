@@ -59,8 +59,11 @@ public class Check_OM1_MinimumMetadata extends Check {
         }else {
             this.status = Constants.ERROR;
             explanation = Constants.OM1_EXPLANATION_ERROR + exp.substring(0, exp.length() - 2);
-            this.guidance = Constants.OM1_GUIDANCE;
-        }
+          this.guidance = "Add the recommended properties. The Turtle code below shows an example:<br>"
+            + buildMetadataSnippet(Constants.MINIMUM_METADATA, null)
+            + "If you are using Chowlk you can use the graphical template for minimum metadata: "
+            + "<a href=\"https://chowlk.linkeddata.es/notation#ontology_metadata\" target=\"_blank\">https://chowlk.linkeddata.es/notation#ontology_metadata</a>";
+            }
 
     }
 }

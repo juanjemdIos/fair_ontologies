@@ -90,7 +90,7 @@ public class Constants {
 //     public static final String CN1_ACTION = "Set up content negotiation for your ontology (e.g., using Widoco, rdflib). Configure htaccess and verify with: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI";
     public static final String CN1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/#content-negotiation";
 
-    public static final String CN1_GUIDANCE = "Set up content negotiation using htaccess. Show how to put htaccess in your server. Tools like Widoco or rdflib can help. Finally, verify with: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI.";
+    public static final String CN1_GUIDANCE = "Set up content negotiation using htaccess. Show how to put htaccess in your server. Tools like Widoco or rdflib can help. Finally, verify with: \n<pre><code>curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI\n</code></pre>";
     //DOC1: HTML doc
     public static final String DOC1 = "DOC1";
     public static String DOC1_TITLE;
@@ -136,18 +136,19 @@ public class Constants {
     public static final String OM1_EXPLANATION_ERROR = "The following metadata was not found: ";
 //     public static final String OM1_ACTION = "Add minimum metadata: title, description, license, versionIRI, creator, creation date, namespace URI and prefix. See the template at https://chowlk.linkeddata.es/notation#ontology_metadata";
     public static final String OM1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String OM1_GUIDANCE = "Add the recommended properties. The Turtle code below shows an example:\n\n" +
-    "<https://w3id.org/example#> a owl:Ontology ;\n" +
-    "    dc:title \"The example ontology\"@en ;\n" +
-    "    dc:description \"Brief description of your ontology.\"@en ;\n" +
-    "    dc:created \"2021-01-01\"^^xsd:date ;\n" +
-    "    dc:creator <https://w3id.org/people#AuthorURI> ;\n" +
-    "    dc:contributor <https://w3id.org/people#AContributorURI> ;\n" +
-    "    dc:license <https://creativecommons.org/licenses/by/4.0/> ;\n" +
-    "    vann:preferredNamespaceUri <https://w3id.org/example#> ;\n" +
-    "    vann:preferredNamespacePrefix \"choosenprefix\" ;\n" +
-    "    owl:versionIRI <https://w3id.org/example/1.0.1> .\n\n" +
-    "If you are using Chowlk you can use the graphical template for minimum metadata: https://chowlk.linkeddata.es/notation#ontology_metadata";
+    public static final String OM1_GUIDANCE = "Add the recommended properties. The Turtle code below shows an example:<br><br>" +
+        "<pre><code>" +
+        "&lt;https://w3id.org/example#&gt; a owl:Ontology ;\n" +
+        "    dc:title \"The example ontology\"@en ;\n" +
+        "    dc:description \"Brief description of your ontology.\"@en ;\n" +
+        "    dc:created \"2021-01-01\"^^xsd:date ;\n" +
+        "    dc:creator &lt;https://w3id.org/people#AuthorURI&gt; ;\n" +
+        "    dc:contributor &lt;https://w3id.org/people#AContributorURI&gt; ;\n" +
+        "    dc:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;\n" +
+        "    vann:preferredNamespaceUri &lt;https://w3id.org/example#&gt; ;\n" +
+        "    vann:preferredNamespacePrefix \"choosenprefix\" ;\n" +
+        "    owl:versionIRI &lt;https://w3id.org/example/1.0.1&gt; .</code></pre><br>" +
+        "If you are using Chowlk you can use the graphical template for minimum metadata: <a href=\"https://chowlk.linkeddata.es/notation#ontology_metadata\" target=\"_blank\">https://chowlk.linkeddata.es/notation#ontology_metadata</a>";
 
     //recommended
     public static final String OM2 = "OM2";
@@ -159,19 +160,19 @@ public class Constants {
     public static final String OM2_EXPLANATION = OM1_EXPLANATION_ERROR;
 //     public static final String OM2_ACTION = "Include the following recommended metadata in your ontology: namespace prefix, version info, creation date, and citation. It is also recommended to include contributor information.";
     public static final String OM2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String OM2_GUIDANCE = "Add recommended metadata: NS Prefix, version info, creation date, citation, contributor.\n\n" +
-    "<https://w3id.org/example#> a owl:Ontology ;\n" +
-    "    dcterms:contributor <https://w3id.org/people#AContributorURI> ;\n" +
+public static final String OM2_GUIDANCE = "Add recommended metadata: NS Prefix, version info, creation date, citation, contributor.<br><br>" +
+    "<pre><code>&lt;https://w3id.org/example#&gt; a owl:Ontology ;\n" +
+    "    dcterms:contributor &lt;https://w3id.org/people#AContributorURI&gt; ;\n" +
     "    dcterms:created \"2021-01-01\"^^xsd:date ;\n" +
-    "    dcterms:creator <https://w3id.org/people#AuthorURI> ;\n" +
+    "    dcterms:creator &lt;https://w3id.org/people#AuthorURI&gt; ;\n" +
     "    dcterms:description \"Brief description of your ontology.\"@en ;\n" +
-    "    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;\n" +
+    "    dcterms:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;\n" +
     "    dcterms:title \"The example ontology\"@en ;\n" +
     "    vann:preferredNamespacePrefix \"choosenprefix\" ;\n" +
-    "    vann:preferredNamespaceUri <https://w3id.org/example#> ;\n" +
-    "    owl:priorVersion <https://w3id.org/example/1.0.0> ;\n" +
-    "    owl:versionIRI <https://w3id.org/example/1.0.1> ;\n" +
-    "    owl:versionInfo \"0.0.1\" .";
+    "    vann:preferredNamespaceUri &lt;https://w3id.org/example#&gt; ;\n" +
+    "    owl:priorVersion &lt;https://w3id.org/example/1.0.0&gt; ;\n" +
+    "    owl:versionIRI &lt;https://w3id.org/example/1.0.1&gt; ;\n" +
+    "    owl:versionInfo \"0.0.1\" .</code></pre>";
 
     //optional
     public static final String OM3 = "OM3";
@@ -195,8 +196,8 @@ public class Constants {
     public static final String OM4_1_EXPLANATION_ERROR = "License or rights not found";
     //     public static final String OM4_1_ACTION = "Include a license using dcterms:license. Use common licenses from SPDX (https://spdx.org/licenses/) or Licensius (https://rdflicense.linkeddata.es/).";
     public static final String OM4_1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String OM4_1_GUIDANCE = "Add a license to your ontology using common licenses. Check SPDX or Licensius (https://rdflicense.linkeddata.es/) for standard license URIs. \n\n" +
-                "dcterms:license <https://creativecommons.org/licenses/by/4.0/> .";
+    public static final String OM4_1_GUIDANCE = "Add a license to your ontology using common licenses. Check SPDX or Licensius (https://rdflicense.linkeddata.es/) for standard license URIs.<br><br>" +
+         "<pre><code>dcterms:license &lt;https://creativecommons.org/licenses/by/4.0/&gt; .</code></pre>";
 
     //license_resolvable
     public static final String OM4_2 = "OM4_2";
@@ -206,8 +207,8 @@ public class Constants {
     public static final String OM4_2_EXPLANATION_ERROR = "The license used could not be resolved";
     //     public static final String OM4_2_ACTION = "Use a resolvable license for the ontology (e.g., Creative Commons licenses)";
     public static final String OM4_2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String OM4_2_GUIDANCE = "Make sure the license URI is resolvable (returns content). Test with curl. \n" +
-            "curl -sI <LICENSE_URI>";
+    public static final String OM4_2_GUIDANCE = "Make sure the license URI is resolvable (returns content). Test with curl.<br>" +
+    "<pre><code>curl -sI $LICENSE_URI</code></pre>";
 
     //provenance
     public static final String OM5_1 = "OM5_1";
@@ -294,7 +295,8 @@ public class Constants {
     public static final String URI1_EXPLANATION_ERROR = "Ontology URL is not resolvable";
 //     public static final String URI1_ACTION = "Make sure your ontology URI resolves. Try: curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI.\n Alternatively, try opening the ontology in tools like Protégé or Widoco.";
     public static final String URI1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String URI1_GUIDANCE = "Check with curl (TTL serialization): curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI. Try opening the ontology in tools like Protégé or Widoco.";
+//     public static final String URI1_GUIDANCE = "Check with curl (TTL serialization): curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI. Try opening the ontology in tools like Protégé or Widoco.";
+   public static final String URI1_GUIDANCE = "Check with curl (TTL serialization):\n<pre><code>curl -sH \"Accept:text/turtle\" -L $ONTOLOGY_URI</code></pre>\nTry opening the ontology in tools like Protégé or Widoco.";
 
     //URI2: Ontology URI is the URI used (only if ontology was loaded through URI)
     public static final String URI2 = "URI2";
@@ -319,9 +321,9 @@ public class Constants {
     public static final String VER1_EXPLANATION_ERROR= "Version IRI "; // to complete on whether it's found or duplicate
 //     public static final String VER1_ACTION = "Generate a version IRI annotation including version information for the ontology. Note that it should be different from the ontology URI:\n<$ONTOLOGY_URI> rdf:type owl:Ontology ;\n    owl:versionIRI <$ONTOLOGY_URI/<version>> .";
     public static final String VER1_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String VER1_GUIDANCE = "Add a version IRI annotation different from the ontology URI.\n\n" +
-    "<$ONTOLOGY_URI> rdf:type owl:Ontology ;\n" +
-    "    owl:versionIRI <$ONTOLOGY_URI/<version>> .";
+    public static final String VER1_GUIDANCE = "Add a version IRI annotation different from the ontology URI.<br>" +
+        "<pre><code>&lt;$ONTOLOGY_URI&gt; rdf:type owl:Ontology ;\n" +
+        "    owl:versionIRI &lt;$ONTOLOGY_URI/&lt;version&gt; .</code></pre>";
 
     public static final String VER2 = "VER2";
     public static String VER2_TITLE;// = "Version IRI resolves";
@@ -332,8 +334,8 @@ public class Constants {
     public static final String VER2_EXPLANATION_ERROR= "Version IRI could not be resolved";
 //     public static final String VER2_ACTION = "Make sure your version IRI resolves. Try: curl -sH \"Accept:text/turtle\" -L $VERSION_IRI";
     public static final String VER2_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
-    public static final String VER2_GUIDANCE = "Run the versionIRI with curl to verify it resolves:\n\n" +
-    "curl -sH \"Accept:text/turtle\" -L $VERSION_IRI\n\n" +
+    public static final String VER2_GUIDANCE = "Run the versionIRI with curl to verify it resolves:\n" +
+    "<pre><code>curl -sH \"Accept:text/turtle\" -L $VERSION_IRI</code></pre>\n" +
     "If no versionIRI is available, add one first (see VER1 guidance).";
 
     //reuse
@@ -369,7 +371,7 @@ public class Constants {
     public static final String VOC3_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
 
     public static final String VOC3_GUIDANCE = "Add rdfs:label (or skos:prefLabel for SKOS) to all ontology terms. \n\n" +
-                                                "ex:MyClass rdfs:label 'My Class'@en .";
+                                                "<pre><code>ex:MyClass rdfs:label 'My Class'@en .</code></pre>";
 
     public static final String VOC4 = "VOC4";
     public static String VOC4_TITLE;// = "Documentation: definitions";
@@ -381,7 +383,7 @@ public class Constants {
     public static final String VOC4_REC_DOC = "https://www.w3.org/TR/swbp-vocab-pub/";
     
     public static final String VOC4_GUIDANCE = "Add rdfs:comment (or skos:definition for SKOS) to all ontology terms. \n\n" +
-                                                "ex:MyClass rdfs:comment 'Description of My Class'@en .";
+                                                "<pre><code>ex:MyClass rdfs:comment 'Description of My Class'@en .</code></pre>";
 
     static{
         Properties props = new Properties();

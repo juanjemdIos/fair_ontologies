@@ -52,12 +52,12 @@ public class Check_OM4_2_LicenseIsResolvable extends Check {
             }else{
                 this.status = Constants.ERROR;
                 this.explanation = Constants.OM4_2_EXPLANATION_ERROR;
-                this.guidance = Constants.OM4_2_GUIDANCE;
+                this.guidance = fillAction(Constants.OM4_2_GUIDANCE);  
             }
         }else{
             this.status = Constants.ERROR;
             this.explanation = Constants.OM4_2_EXPLANATION_ERROR;
-            this.guidance = Constants.OM4_2_GUIDANCE;
+            this.guidance = fillAction(Constants.OM4_2_GUIDANCE);
         }
 
     }

@@ -691,13 +691,11 @@ function getCheckHTML(check_info) {
                 <dd>${check_info.explanation}</dd>
                 ${check_info.status !== 'OK' ? `
                 <dt class="suggestion-dt">Suggestion</dt>
-                <dd>${(check_info.guidance || 'No action suggested').replace(/\n/g, '<br>')}${check_info.recommendedDoc ? `<br><br>For more information, see <a href="${check_info.recommendedDoc}" target="_blank">${check_info.recommendedDoc}</a>` : ''}</dd>
+                <dd>${renderGuidance(check_info.guidance)}
+                ${check_info.recommendedDoc ? `<br>For more information, see <a href="${check_info.recommendedDoc}" target="_blank">${check_info.recommendedDoc}</a>` : ''}</dd>
                 ` : ''}
               </dl>
             </div>
-
-
-
 
               ${affected_URIs_HTML}
               ${reference_URIs_HTML}
@@ -961,6 +959,14 @@ function showSuggest(titulo, contenido, ey) {
       */
 
 
+}
+function renderGuidance(guidance) {
+  if (!guidance) return 'No action suggested';
+  const parts = guidance.split(/(<pre>[\s\S]*?<\/pre>)/g);
+  return parts.map(part => {
+    if (part.startsWith('<pre>')) return part;
+    return part.replace(/\n/g, '<br>');
+  }).join('');
 }
 
   /**********/
