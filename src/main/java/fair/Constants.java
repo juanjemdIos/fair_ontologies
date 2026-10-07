@@ -337,8 +337,11 @@ public class Constants {
             + "        This option is incompatible with -ontFile\n" ;
 
     // registries
-    public static final String LOV_ALL_VOCABS = "https://lov.linkeddata.es/dataset/lov/api/v2/vocabulary/list";
-    public static final String LOV_PREFIX_VOCAB = "https://lov.linkeddata.es/dataset/lov/api/v2/vocabulary/info?vocab=";
+    // former api
+//     public static final String LOV_ALL_VOCABS = "https://lov.linkeddata.es/dataset/lov/api/v2/vocabulary/list";
+//     public static final String LOV_PREFIX_VOCAB = "https://lov.linkeddata.es/dataset/lov/api/v2/vocabulary/info?vocab=";
+    public static final String LOV_ALL_VOCABS = "https://lov.linkeddata.es/dataset/api/v2/vocabulary/list";
+    public static final String LOV_PREFIX_VOCAB = "https://lov.linkeddata.es/dataset/api/v2/vocabulary/info?vocab=";
     public static final String PREFIX_CC = "http://prefix.cc/";
 
     //to do: ontobee (http://www.ontobee.org/sparql), bioportal,
@@ -392,6 +395,8 @@ public class Constants {
     public static final String SKOS_CONCEPT_SCHEME = NS_SKOS +  "ConceptScheme";
     public static final String PROP_SKOS_PREF_LABEL = NS_SKOS +  "prefLabel";
     public static final String PROP_SKOS_PREF_DEFINITION = NS_SKOS +  "definition";
+
+    public static final String PROP_SKOS_IN_SCHEME = NS_SKOS + "inScheme";
 
     public static final String PROP_OBO_ALT_LABEL = "http://purl.obolibrary.org/obo/IAO_0000118";
 
