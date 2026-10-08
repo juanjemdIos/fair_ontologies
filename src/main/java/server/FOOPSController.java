@@ -70,7 +70,10 @@ public class FOOPSController {
         + "{\n" 
         + " \"ontologyUri\": \"https://w3id.org/example#\"\n"
         + "}\n" 
-        + "```"
+        + "```\n"
+        + "Note: Tests may fail if the ontology is too large (max 50MB)\n" 
+        + "or if the URI is not valid or not resolvable."
+
         )
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/assessOntology", consumes = "application/json", produces = "application/json")
@@ -216,6 +219,7 @@ public class FOOPSController {
                     + " \"resource_identifier\": \"https://w3id.org/example#\"\n"
                     + "}\n"
                     + "```"
+                    + "Note: Tests may fail if the ontology is too large (max 50MB)."
     )
     @CrossOrigin(origins = "*")
     @PostMapping(path = "assess/test/{test_identifier}", consumes = "application/json", produces = "application/json")
@@ -289,6 +293,7 @@ public class FOOPSController {
                     + " \"resource_identifier\": \"https://w3id.org/example#\"\n"
                     + "}\n"
                     + "```"
+                    + "Note: Tests may fail if the ontology is too large (max 50MB)."
     )
     @PostMapping(path = "assess/resultset/{identifier}",  consumes = "application/json", produces = "application/json")
     public String postResultSetAssessment(@PathVariable String identifier,
@@ -389,7 +394,8 @@ public class FOOPSController {
     @Operation(
             summary = "Assess an ontology against a set of FOOPS! tests for pre-assessment. This is the original FOOPS! call for assessment.",
             description = "This call returns a JSON response obtained by FOOPS. " +
-                    "The ontology for assessment is in the body of the POST request"
+                        "The ontology for assessment is in the body of the POST request.\n\n" +
+                        "Note: Tests may fail if the ontology is too large for complete analysis (max 50MB)."
     )
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/assessOntologyFile",consumes = "multipart/form-data", produces = "application/json")
@@ -437,6 +443,39 @@ public class FOOPSController {
                     new Exception("Ontology URI or ontology content not provided"));
         }
 
+    }
+    
+    @Operation(
+        summary = "Returns a benchmark score for a resource following the FTR specification.",
+        description = "Returns a BenchmarkScore according to the FTR specification. " +
+                "Available benchmark identifiers: ALL, PRE.\n" +
+                "Example request JSON:\n" +
+                "```\n" +
+                "{\n" +
+                " \"resource_identifier\": \"https://w3id.org/example#\"\n" +
+                "}\n" +
+                "```"
+    )
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "assess/scoringAlgorithm/{identifier}", consumes = "application/json", produces = "application/json")
+    public String postBenchmarkScore(@PathVariable String identifier,
+                                    @RequestBody OntologyAssessmentRequest body) {
+        FOOPS f = null;
+        try {
+            String targetResource = body.getResourceIdentifier();
+            logger.info("Received benchmark score request - benchmark: " + identifier + ", resource: " + targetResource);
+            f = new FOOPS(targetResource, false);
+            f.fairTest();
+            return applyOstrailsStatusMapping(f.exportBenchmarkScore(identifier));
+        } catch (FileTooLargeException el) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    "File sent for assessment is too big (max 50MB)");
+        } catch (Exception e) {
+            logger.error("Error " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Malformed JSON request");
+        } finally {
+            if (f != null) f.removeTemporaryFolders();
+        }
     }
 
     private String applyOstrailsStatusMapping(String jsonLD) {

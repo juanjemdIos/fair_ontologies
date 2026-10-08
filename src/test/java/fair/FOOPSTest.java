@@ -412,24 +412,111 @@ public class FOOPSTest {
         }
     }
 
-        /**
-         * Prefix declared in uppercase (OSO) but registered in LOV in lowercase (oso).
-         * FIND2 should retry with the lowercase prefix and pass.
-         */
-        @Test
-        public void prefixInRegistryUppercase(){
-            try {
-                ClassLoader classLoader = getClass().getClassLoader();
-                File is = new File(classLoader.getResource("test_prefix_uppercase.ttl").getFile());
-                FOOPS f = new FOOPS(is.toString(), true);
-                Check_FIND2_PrefixInRegistry check = new Check_FIND2_PrefixInRegistry(f.getOntology());
-                check.check();
-                assertEquals(Constants.OK, check.getStatus());
-                f.removeTemporaryFolders();
-            } catch (Exception e) {
-                logger.error("Could not load the resource file");
-                fail();
-            }
+    /**
+     * Prefix declared in uppercase (OSO) but registered in LOV in lowercase (oso).
+     * FIND2 should retry with the lowercase prefix and pass.
+     */
+    @Test
+    public void prefixInRegistryUppercase(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("test_prefix_uppercase.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            Check_FIND2_PrefixInRegistry check = new Check_FIND2_PrefixInRegistry(f.getOntology());
+            check.check();
+            assertEquals(Constants.OK, check.getStatus());
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file");
+            fail();
         }
+    }
+  
+    /**
+     * This test verifies that the benchmark score endpoint returns a valid
+     * BenchmarkScore JSON-LD with the required fields (scoring algorithm feature)
+     */
+    @Test
+    public void testExportBenchmarkScore() {
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("ontology_100.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            f.fairTest();
+            String result = f.exportBenchmarkScore("ALL");
+            assertNotNull(result);
+            assertTrue("Result must contain BenchmarkScore type", result.contains("ftr#BenchmarkScore"));
+            assertTrue("Result must contain outputFromAlgorithm", result.contains("outputFromAlgorithm"));
+            assertTrue("Result must contain algorithm ALL", result.contains("https://w3id.org/foops/algorithm/ALL"));
+            assertTrue("Result must contain value", result.contains("\"value\""));
+            assertTrue("Result must contain log", result.contains("\"log\""));
+            assertTrue("Result must contain scoredTestResults", result.contains("scoredTestResults"));
+            assertTrue("Result must contain TestResultSet", result.contains("ftr#TestResultSet"));
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file");
+            fail();
+        }
+    }
+
+    /**
+     * This test verifies that a concept scheme is inferred when none is declared.
+     */
+    @Test
+    public void testSKOSInferredScheme(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_inferred.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            assertTrue(f.getOntology().isSKOS());
+            assertEquals("http://vocab.example.org/my-scheme", f.getOntology().getOntologyURI());
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file");
+            fail();
+        }
+    }
+  
+    /**
+     * VOC1 must pass for a SKOS vocabulary whose metadata (dc) lives in the
+     * skos:ConceptScheme and that has no owl:Ontology node. Dani detected in issue 274
+     * with https://vocabs.ilc4clarin.ilc.cnr.it/vocabularies/echoes/
+     */
+    @Test
+    public void testVOC1SkosConceptSchemeMetadata(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_example.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            Check_VOC1_VocabReuseMetadata c = new Check_VOC1_VocabReuseMetadata(f.getOntology());
+            c.check();
+            assertEquals(Constants.OK, c.getStatus());
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
+
+    /**
+     * VOC1 must still fail for a SKOS vocabulary whose concept scheme does not
+     * use any whitelisted metadata vocabulary. Dani detected in issue 274
+     * with https://vocabs.ilc4clarin.ilc.cnr.it/vocabularies/echoes/.
+     */
+    @Test
+    public void testVOC1SkosWithoutReusedMetadata(){
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            File is = new File(classLoader.getResource("skos_no_metadata.ttl").getFile());
+            FOOPS f = new FOOPS(is.toString(), true);
+            Check_VOC1_VocabReuseMetadata c = new Check_VOC1_VocabReuseMetadata(f.getOntology());
+            c.check();
+            assertEquals(Constants.ERROR, c.getStatus());
+            f.removeTemporaryFolders();
+        } catch (Exception e) {
+            logger.error("Could not load the resource file", e);
+            fail();
+        }
+    }
 
 }
